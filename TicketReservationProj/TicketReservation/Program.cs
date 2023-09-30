@@ -1,6 +1,17 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Microsoft.Extensions.DependencyInjection;
+using ticketreservation.Data;
+using ticketreservation.Services;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<DatabaseSettings>(
+    builder.Configuration.GetSection("ConnectionStrings"));
+
+builder.Services.AddSingleton<TrainServices>();
+
+
+
 
 builder.Services.AddControllersWithViews();
 
@@ -22,7 +33,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html"); ;
 
 app.Run();
 
