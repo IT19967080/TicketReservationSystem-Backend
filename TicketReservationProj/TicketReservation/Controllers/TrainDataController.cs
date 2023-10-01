@@ -11,10 +11,12 @@ namespace ticketreservation.Controllers
     public class TrainDataController : ControllerBase
     {
         private readonly TrainDataServices _trainDataServices;
+        private readonly ILogger<TrainDataController> _logger;
 
-        public TrainDataController(TrainDataServices trainDataServices)
+        public TrainDataController(TrainDataServices trainDataServices, ILogger<TrainDataController> logger)
         {
             _trainDataServices = trainDataServices;
+            _logger = logger;
         }
 
         // GET: api/traindata
@@ -37,12 +39,31 @@ namespace ticketreservation.Controllers
             return Ok(train);
         }
 
-        // POST: api/traindata
-        [HttpPost]
         public async Task<IActionResult> Create(TrainData newTrain)
         {
-            await _trainDataServices.createAsync(newTrain);
-            return CreatedAtAction(nameof(Get), new { id = newTrain.Id }, newTrain);
+            try
+            {
+                // Validate the incoming data (you can use data annotations or FluentValidation).
+                if (newTrain == null)
+                {
+                    _logger.LogError("Invalid data. The train data is missing.");
+                    return BadRequest("Invalid data. The train data is missing.");
+                }
+
+                // Attempt to create the new train data.
+                await _trainDataServices.createAsync(newTrain);
+
+                // Return a 201 Created response with the newly created train data.
+                return CreatedAtAction(nameof(Get), new { id = newTrain.Id }, newTrain);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging and analysis purposes.
+                // You may also want to consider returning a custom error response.
+                // For simplicity, here we return a 500 Internal Server Error.
+                _logger.LogError($"An error occurred: {ex.Message}");
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
         }
 
         // PUT: api/traindata/{id}

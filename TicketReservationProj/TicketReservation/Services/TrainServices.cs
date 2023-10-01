@@ -3,12 +3,17 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ticketreservation.Models;
 using ticketreservation.Data;
+using Microsoft.Extensions.Logging;
+
+// Configure Serilog in your application startup code.
 
 
 namespace ticketreservation.Services
 {
+
 	public class TrainServices
 	{
+
 
         private readonly IMongoCollection<Train> _trainCollection;
 

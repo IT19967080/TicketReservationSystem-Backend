@@ -14,7 +14,7 @@ library.add(  faPen);
   
 const Home = () => {
 
-  const [coomplaints,setComplaints] = useState([]);
+  const [trainschedule,settrainschedule] = useState([]);
   const [show,setshow] = useState(false)
   const [deletedata,setdeletedata] = useState({})
   const [searchVal , setSearchVal] = useState("");
@@ -31,17 +31,17 @@ const Home = () => {
     fetch("api/train").then(r=> r.json()).then(response=>{  
       console.log("Hi")   
         console.log(response)
-        setComplaints(response)
+        settrainschedule(response)
     }).catch(e=>console.log("The error fetching all schedules",e))
   },[])
 
   const getData = () => {
     console.log("aaa")
     
-    // axios.get(`http://localhost:8070/complaints/get/user/${email}`)
-    //     .then((res) => {
-    //       setComplaints(res.data);
-    // })
+    axios.get(`api/train`)
+        .then((res) => {
+          settrainschedule(res.data);
+    })
   }
  function updateComplaint(data){
     console.log(data)
@@ -50,28 +50,28 @@ const Home = () => {
  }
 
 
-  const deletecomplaint = (data)=>{
+  const deleteSchedule = (data)=>{
     setdeletedata(data)
-    console.log(data._id)
+    console.log(data.id)
     setshow(true)
     
   }
 
   const handleDelete = ()=>{
     console.log(deletedata)
-    // axios.delete(`http://localhost:8070/complaints/delete/${deletedata._id}`).then((data)=>{
-    //     setshow(false)
-    //     toast.success('Complaint Deleted!', {
-    //     position: "bottom-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     });
+    axios.delete(`api/train/${deletedata.id}`).then((data)=>{
+        setshow(false)
+        toast.success('Schedule Deleted!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
       getData();
-   // })
+    })
   }
 
   const filterComplaints = e =>{
@@ -83,7 +83,7 @@ const Home = () => {
 
   const globalSearch = () =>{
  
-    filterData = coomplaints.filter((value)=>{
+    filterData = trainschedule.filter((value)=>{
       
       return(
         value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
@@ -93,7 +93,7 @@ const Home = () => {
       )     
     })
     console.log(filterData)
-    setComplaints(filterData)
+    settrainschedule(filterData)
    
   }
   return (
@@ -146,7 +146,7 @@ const Home = () => {
         </thead>
         <tbody>
   
-        {coomplaints.map((data,index)=>{    
+        {trainschedule.map((data,index)=>{    
         return(
           <tr style={{}}>
           <td>{data.trainName}</td>
@@ -160,7 +160,7 @@ const Home = () => {
                                   updateComplaint(data)
                                 }} class="fa fa-pencil-square" aria-hidden="true"></i>
           <a onClick = {()=>{
-                                  deletecomplaint(data)
+                                  deleteSchedule(data)
                                 }}><i style={{marginLeft:"20px", marginRight:"20px"}} class="fa fa-trash" aria-hidden="true"  
                                 ></i></a>
           </td>

@@ -19,6 +19,7 @@ function AddSchedule(){
     const [source,setsource] = useState("");
     const [destination,setdestination] = useState("");
     const [schedule,setschedule] = useState([]);
+    const [traindata,settraindata] = useState([]);
 
     // const [handletextarea, sethandletextarea] = useState(false)
     const [sucessfull, setSucessfull] = useState(false);
@@ -34,6 +35,12 @@ function AddSchedule(){
           }).catch(e=>console.log("The error fetching all schedules",e))
 
       
+          fetch("api/traindata").then(r=> r.json()).then(response=>{  
+            console.log("Hi")   
+              console.log(response)
+              settraindata(response)
+          }).catch(e=>console.log("The error fetching all schedules",e))
+
      },[])
 
  
@@ -93,7 +100,7 @@ function AddSchedule(){
              })
               .then((res) => {
                
-                toast.success('Complaint Added!', {
+                toast.success('Schedule Added!', {
                   position: "bottom-right",
                   autoClose: 5000,
                   hideProgressBar: false,
@@ -104,7 +111,7 @@ function AddSchedule(){
                   });
                 console.log(res.data)  
             
-                setdate("Issue in the shed");
+                setdate("");
                 setstarttime("");
                 settrainName("");
                 setendtime("");
@@ -157,9 +164,12 @@ function AddSchedule(){
         <div class="form-group">
           <label for="exampleFormControlSelect1" style={{float:"left"}}>Train Name</label>
           <select value={trainName} onChange={(e)=>{settrainName(e.target.value)}} class="form-control form-select" required>
-          <option>Ruhunu Kumari</option>
-          <option>Udarata Manike</option>
-          <option>Galu Kumari</option>
+          {traindata.map((train) => (
+            
+        <option key={train.id} value={train.trainName}>
+          {train.trainName}
+        </option>
+      ))}
       </select>
         </div>
         <br></br>
