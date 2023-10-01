@@ -9,21 +9,21 @@ namespace ticketreservation.Services
 {
 	public class TrainServices
 	{
-		private readonly IMongoCollection<Train> _trainCollection;
 
-		public TrainServices(IOptions<DatabaseSettings> settings)
-		{
-			var mongoClient = new MongoClient(settings.Value.Connection);
-			var mongoDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
-			_trainCollection = mongoDb.GetCollection<Train>(settings.Value.CollectionName);
+        private readonly IMongoCollection<Train> _trainCollection;
 
-		}
+        public TrainServices(IOptions<DatabaseSettings> settings)
+        {
+            var mongoClient = new MongoClient(settings.Value.Connection);
+            var mongoDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
+            _trainCollection = mongoDb.GetCollection<Train>(settings.Value.TrainScheduleCollectionName);
+
+        }
 
 
+        // get all train schedules
 
-		// get all train schedules
-
-		public async Task<List<Train>> GetAsync() => await _trainCollection.Find(_ => true).ToListAsync();
+        public async Task<List<Train>> GetAsync() => await _trainCollection.Find(_ => true).ToListAsync();
 
 
 		// get train schedule byId

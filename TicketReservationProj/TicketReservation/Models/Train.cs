@@ -11,8 +11,7 @@ namespace ticketreservation.Models
 		[BsonId]
 		[BsonRepresentation(BsonType.ObjectId)]
 		public string Id { get; set; } = string.Empty;
-		[BsonElement("scheduleId")]
-		public string ScheduleId { get; set; } = "scheduleId";
+	
 
 		[BsonElement("trainname")]
         public string TrainName { get; set; } = "train name";
@@ -20,13 +19,17 @@ namespace ticketreservation.Models
         [BsonElement("date")]
         public string Date { get; set; } = "date";
 
-        [BsonElement("time")]
-        public string Time { get; set; } = "time";
+        [BsonElement("starttime")]
+        public string StartTime { get; set; } = "start time";
 
-        [BsonElement("status")]
-        public bool Status { get; set; } 
+        [BsonElement("endtime")]
+        public string EndTime { get; set; } = "end time";
 
+        [BsonElement("source")]
+        public String Source { get; set; } = "source";
 
+        [BsonElement("destination")]
+        public String Destination { get; set; } = "destination";
     }
 }
 
