@@ -3,27 +3,32 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ticketreservation.Models;
 using ticketreservation.Data;
+using Microsoft.Extensions.Logging;
+
+// Configure Serilog in your application startup code.
 
 
 namespace ticketreservation.Services
 {
+
 	public class TrainServices
 	{
-		private readonly IMongoCollection<Train> _trainCollection;
-
-		public TrainServices(IOptions<DatabaseSettings> settings)
-		{
-			var mongoClient = new MongoClient(settings.Value.Connection);
-			var mongoDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
-			_trainCollection = mongoDb.GetCollection<Train>(settings.Value.CollectionName);
-
-		}
 
 
+        private readonly IMongoCollection<Train> _trainCollection;
 
-		// get all train schedules
+        public TrainServices(IOptions<DatabaseSettings> settings)
+        {
+            var mongoClient = new MongoClient(settings.Value.Connection);
+            var mongoDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
+            _trainCollection = mongoDb.GetCollection<Train>(settings.Value.TrainScheduleCollectionName);
 
-		public async Task<List<Train>> GetAsync() => await _trainCollection.Find(_ => true).ToListAsync();
+        }
+
+
+        // get all train schedules
+
+        public async Task<List<Train>> GetAsync() => await _trainCollection.Find(_ => true).ToListAsync();
 
 
 		// get train schedule byId

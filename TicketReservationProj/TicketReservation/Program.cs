@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ticketreservation.Data;
 using ticketreservation.Services;
+using TicketReservation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<TrainServices>();
 
-
+builder.Services.AddSingleton<TrainDataServices>();
 
 
 builder.Services.AddControllersWithViews();
