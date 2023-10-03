@@ -4,11 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
-import ComplaintHeader from './complaintHeader';
+import ComplaintHeader from './trainManagementHeader';
 import PageTitle from '../PageTitle';
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {Modal,Button} from 'react-bootstrap'
+import TrainManagementHeader from './trainManagementHeader';
 library.add(  faPen);
 
   
@@ -99,7 +100,7 @@ const ViewSchedule = () => {
   return (
     <>
 
-     <ComplaintHeader/>
+     <TrainManagementHeader/>
      <PageTitle pageTitle="Train Schedules"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>
