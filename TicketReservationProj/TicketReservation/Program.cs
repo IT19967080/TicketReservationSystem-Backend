@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ticketreservation.Data;
 using ticketreservation.Services;
+using TicketReservation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
 builder.Services.AddSingleton<TrainServices>();
+builder.Services.AddSingleton<TravellerServices>();
 
 
 
@@ -27,7 +29,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

@@ -9,6 +9,8 @@ namespace ticketreservation.Data
         public string DatabaseName { get; set; }
         public string Connection { get; set; }
 
+		public string TravellerCollectionName { get; set; }
+
 	}
 }
 
