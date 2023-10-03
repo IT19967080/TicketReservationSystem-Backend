@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
+builder.Services.AddAuthentication().AddCookie("cookie");
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddSingleton<TrainServices>();
 
 
@@ -25,6 +29,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
 
