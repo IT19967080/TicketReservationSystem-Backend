@@ -3,11 +3,16 @@ import AddTrain from "./components/TrainManagement/addTrain";
 import AddSchedule from "./components/TrainManagement/addSchedule";
 import UpdateSchedule from "./components/TrainManagement/updateSchedule";
 import ViewTrain from "./components/TrainManagement/viewTrain";
+import ViewSchedule from "./components/TrainManagement/viewSchedule";
 
 const AppRoutes = [
   {
     path: '/home',
     element: <Home />
+  },
+  {
+    path: '/viewschedule',
+    element: <ViewSchedule />
   },
   {
     path: '/addschedule',
