@@ -8,7 +8,7 @@ namespace ticketreservation.Data
         public string TrainScheduleCollectionName { get; set; }
         public string DatabaseName { get; set; }
         public string Connection { get; set; }
-
-	}
+        public string TicketBookingCollectionName { get; set; }
+    }
 }
 

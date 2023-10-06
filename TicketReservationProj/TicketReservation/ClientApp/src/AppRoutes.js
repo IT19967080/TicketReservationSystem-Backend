@@ -4,6 +4,9 @@ import AddSchedule from "./components/TrainManagement/addSchedule";
 import UpdateSchedule from "./components/TrainManagement/updateSchedule";
 import ViewTrain from "./components/TrainManagement/viewTrain";
 import ViewSchedule from "./components/TrainManagement/viewSchedule";
+import AddTicket from "./components/TicketManagement/addReservation";
+import ViewReservation from "./components/TicketManagement/viewReservation";
+import UpdateReservation from "./components/TicketManagement/updateReservation";
 
 const AppRoutes = [
   {
@@ -29,6 +32,18 @@ const AppRoutes = [
   {
     path: '/viewtrain',
     element: <ViewTrain/>
+  },
+  {
+    path: '/addticket',
+    element: <AddTicket/>
+  },
+  {
+    path: '/viewticket',
+    element: <ViewReservation/>
+  },
+  {
+    path: '/editreservation/:id',
+    element: <UpdateReservation/>
   }
 ];
 
