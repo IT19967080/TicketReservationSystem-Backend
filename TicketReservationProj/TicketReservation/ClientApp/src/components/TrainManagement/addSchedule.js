@@ -5,7 +5,7 @@ import axios from "axios";
 import React from "react";
 import "../../styles/addcomplaint.module.css"
 import PageTitle from '../PageTitle';
-import ComplaintHeader from './complaintHeader';
+import ComplaintHeader from './trainManagementHeader';
 
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";

@@ -13,9 +13,9 @@ import TrainManagementHeader from './trainManagementHeader';
 library.add(  faPen);
 
   
-const ViewTrain = () => {
+const ViewReservation = () => {
 
-  const [traindata,settraindata] = useState([]);
+  const [reservationData,setreservationData] = useState([]);
   const [show,setshow] = useState(false)
   const [deletedata,setdeletedata] = useState({})
   const [searchVal , setSearchVal] = useState("");
@@ -30,10 +30,10 @@ const ViewTrain = () => {
   const navigate = useNavigate();
   useEffect(()=>{
   
-    fetch("api/traindata").then(r=> r.json()).then(response=>{  
+    fetch("api/ticket").then(r=> r.json()).then(response=>{  
       console.log("Hi")   
         console.log(response)
-        settraindata(response)
+        setreservationData(response)
     }).catch(e=>console.log("The error fetching all schedules",e))
 
     fetch("api/train").then(r=> r.json()).then(response=>{  
@@ -47,41 +47,70 @@ const ViewTrain = () => {
   const getData = () => {
     console.log("aaa")
     
-    axios.get(`api/traindata`)
+    axios.get(`api/ticket`)
         .then((res) => {
-          settraindata(res.data);
+          setreservationData(res.data);
     })
   }
- function updateComplaint(data){
-    console.log(data)
-    console.log(data.id)
-    navigate(`/editschedule/${data.id}`)
+ 
+  function updateReservation(data){
+
+     // Calculate the difference in days between the current date and the reservation date
+     const currentDate = new Date();
+     const reservationDate = new Date(data.date); // Assuming deletedata.date contains the reservation date
+     const daysDifference = Math.floor((reservationDate - currentDate) / (24 * 60 * 60 * 1000));
+   
+     console.log(daysDifference)
+
+     if (daysDifference >= 5) {
+
+        navigate(`/editreservation/${data.id}`)
+      
+    } else {
+        // Show an error message indicating that reservations can only be canceled at least 5 days in advance
+        alert("Reservations can only be updated at least 5 days in advance.");
+        // Optionally, you can prevent the deletion from happening
+        // handleClose(); // Close the modal without performing the deletion
+      }
+ 
+
+    
  }
 
 
-  const deletetraindata = (data)=>{
-    setdeletedata(data)
-    console.log(data.id)
-    setshow(true)
+  const deletereservationData = (data)=>{
+
+     // Calculate the difference in days between the current date and the reservation date
+     const currentDate = new Date();
+     const reservationDate = new Date(data.date); // Assuming deletedata.date contains the reservation date
+     const daysDifference = Math.floor((reservationDate - currentDate) / (24 * 60 * 60 * 1000));
+   
+     console.log(daysDifference)
+     if (daysDifference >= 5) {
+       // Perform the deletion action here
+       // Call your API to delete the reservation or perform the necessary actions
+       setdeletedata(data)
+       console.log(data.id)
+       setshow(true)
+       // After successful deletion, close the modal and update the state as needed
+       //handleClose();
+       // ... additional logic for deletion
+     } else {
+       // Show an error message indicating that reservations can only be canceled at least 5 days in advance
+       alert("Reservations can only be canceled at least 5 days in advance.");
+       // Optionally, you can prevent the deletion from happening
+       // handleClose(); // Close the modal without performing the deletion
+     }
+
+   
     
   }
 
   const handleDelete = ()=>{
-    console.log(deletedata)
-    const isTrainExist = trainschedule.some((item) => {
-        console.log(deletedata.trainName)
-        console.log(item.trainName)
-    return (
-      item.trainName === deletedata.trainName 
-    );
-    })
-    if(isTrainExist){
-        alert('Train is Reserved and cannot be deleted');
-        setshow(false)
-    }else{
-        axios.delete(`api/traindata/${deletedata.id}`).then((data)=>{
+    
+        axios.delete(`api/ticket/${deletedata.id}`).then((data)=>{
             setshow(false)
-            toast.success('Complaint Deleted!', {
+            toast.success('Ticket Reservation Deleted!', {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -92,7 +121,7 @@ const ViewTrain = () => {
             });
           getData();
         })
-    }
+    
     
   }
 
@@ -105,7 +134,7 @@ const ViewTrain = () => {
 
   const globalSearch = () =>{
  
-    filterData = traindata.filter((value)=>{
+    filterData = reservationData.filter((value)=>{
       
       return(
         value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
@@ -115,14 +144,14 @@ const ViewTrain = () => {
       )     
     })
     console.log(filterData)
-    settraindata(filterData)
+    setreservationData(filterData)
    
   }
   return (
     <>
 
      <TrainManagementHeader/>
-     <PageTitle pageTitle="Train Information"/> 
+     <PageTitle pageTitle="Reservation Information"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>
     
@@ -156,29 +185,30 @@ const ViewTrain = () => {
         <table className="table" style={ {minwidth: "100px",}}>
         <thead  style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
           <tr>
-
+          <th scope="col">Name</th>
           <th scope="col">TrainName</th>
-          <th scope="col">Train Type</th>
-          <th scope="col">Driver</th>
-          <th scope="col">Capacity</th>
-          <th scope="col">Status</th>
+          <th scope="col">ReservationId</th>
+          <th scope="col">Time</th>
+          <th scope="col">Date</th>
           <th scope="col">Actions</th>
          </tr>
         </thead>
         <tbody>
   
-        {traindata.map((data,index)=>{    
+        {reservationData.map((data,index)=>{    
         return(
           <tr style={{}}>
+          <td>{data.name}</td>
           <td>{data.trainName}</td>
-          <td>{data.trianType}</td>
-          <td>{data.driverName}</td>
-          <td>{data.capacity}</td>
-          <td>{data.status}</td>
+          <td>{data.referenceId}</td>
+          <td>{data.time}</td>
+          <td>{data.date}</td>
           <td>     
-         
+          <i onClick = {()=>{
+                                  updateReservation(data)
+                                }} class="fa fa-pencil-square" aria-hidden="true"></i>
           <a onClick = {()=>{
-                                  deletetraindata(data)
+                                  deletereservationData(data)
                                 }}><i style={{marginLeft:"20px", marginRight:"20px"}} class="fa fa-trash" aria-hidden="true"  
                                 ></i></a>
           </td>
@@ -196,6 +226,6 @@ const ViewTrain = () => {
   )
 }
 
-export default ViewTrain
+export default ViewReservation
 
 

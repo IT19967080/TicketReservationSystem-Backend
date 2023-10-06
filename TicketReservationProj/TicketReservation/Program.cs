@@ -12,7 +12,7 @@ builder.Services.Configure<DatabaseSettings>(
 builder.Services.AddSingleton<TrainServices>();
 
 builder.Services.AddSingleton<TrainDataServices>();
-
+builder.Services.AddSingleton<TicketBookingServices>();
 
 builder.Services.AddControllersWithViews();
 
