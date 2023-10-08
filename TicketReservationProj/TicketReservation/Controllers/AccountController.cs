@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,11 @@ namespace TicketReservation.Controllers
         }
     }
 
-    [HttpGet("login")]
-    public async IActionResult Get()
-    {
-        var trains = await _trainServices.GetAsync();
-        return Ok(trains);
-    }
+    //[HttpGet("login")]
+    //public async IActionResult Get()
+    //{
+    //    var trains = await _trainServices.GetAsync();
+    //    return Ok(trains);
+    //}
 
 }

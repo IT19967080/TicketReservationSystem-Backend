@@ -4,6 +4,9 @@ import AddSchedule from "./components/TrainManagement/addSchedule";
 import UpdateSchedule from "./components/TrainManagement/updateSchedule";
 import ViewTrain from "./components/TrainManagement/viewTrain";
 import ViewSchedule from "./components/TrainManagement/viewSchedule";
+import UserRegistration from "./components/UserManagement/Register";
+import ViewUsers from "./components/UserManagement/ViewUsers";
+import UserLogin from "./components/UserManagement/Login";
 
 const AppRoutes = [
   {
@@ -29,6 +32,18 @@ const AppRoutes = [
   {
     path: '/viewtrain',
     element: <ViewTrain/>
+  },
+  {
+    path: '/register',
+    element: <UserRegistration/>
+  },
+  {
+    path: '/view_users',
+    element: <ViewUsers/>
+  },
+  {
+    path: '/login',
+    element: <UserLogin/>
   }
 ];
 
