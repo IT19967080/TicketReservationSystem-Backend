@@ -4,7 +4,7 @@ import { Navbar , Container , Nav  } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/common.module.css";
 
-function ComplaintHeader(){
+function TrainManagementHeader(){
 
     const navigate = useNavigate();
     function logOut(){
@@ -30,11 +30,17 @@ function ComplaintHeader(){
                         navbarScroll
                     >   
                        
-                       <Nav.Link href="/addcomplaint"  className={styles.navLink} >
-                            Add Complaint
+                       <Nav.Link href="/addtrain"  className={styles.navLink} >
+                            Add Trian
                         </Nav.Link>
-                        <Nav.Link href="/viewcomplaint"  className={styles.navLink} >
-                            My Complaints
+                        <Nav.Link href="/viewtrain"  className={styles.navLink} >
+                            Trian Management
+                        </Nav.Link>
+                        <Nav.Link href="/addschedule"  className={styles.navLink} >
+                            Schedule Management
+                        </Nav.Link>
+                        <Nav.Link href="/viewschedule"  className={styles.navLink} >
+                            Add Schedule
                         </Nav.Link>
                         <Nav.Link href="#"   className={styles.navLink}>
                             Report
@@ -56,4 +62,4 @@ function ComplaintHeader(){
     )
 }
 
-export default ComplaintHeader;
+export default TrainManagementHeader;

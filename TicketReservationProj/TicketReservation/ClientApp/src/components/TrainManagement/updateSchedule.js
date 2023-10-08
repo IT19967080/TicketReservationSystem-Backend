@@ -3,10 +3,11 @@ import axios from 'axios';
 import React from "react";
 import "../../styles/addcomplaint.module.css"
 import {useParams} from "react-router-dom"
-import ComplaintHeader from "./complaintHeader";
+import ComplaintHeader from "./trainManagementHeader";
 import PageTitle from "../PageTitle";
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import TrainManagementHeader from "./trainManagementHeader";
 
 const UpdateSchedule = () => {
 
@@ -75,7 +76,7 @@ const UpdateSchedule = () => {
 
   return (
     <>
-        <ComplaintHeader/>
+        <TrainManagementHeader/>
         <PageTitle pageTitle="Add New Complaint"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
