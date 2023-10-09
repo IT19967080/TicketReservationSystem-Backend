@@ -2,6 +2,10 @@
 using ticketreservation.Data;
 using ticketreservation.Services;
 using TicketReservation.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +13,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
-builder.Services.AddSingleton<TrainServices>();
+
 builder.Services.AddSingleton<TravellerServices>();
+builder.Services.AddAuthentication().AddCookie("cookie");
 
+builder.Services.AddAuthorization();
 
+builder.Services.AddSingleton<TrainServices>();
 
+builder.Services.AddSingleton<TrainDataServices>();
+builder.Services.AddSingleton<TicketBookingServices>();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+
 
 var app = builder.Build();
 
@@ -27,6 +51,8 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
 
