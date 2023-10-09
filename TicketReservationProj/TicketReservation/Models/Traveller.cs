@@ -23,7 +23,10 @@ namespace TicketReservation.Models
         public string DateOfBirth { get; set; } = "Date of Birth";
 
         [BsonElement("email")]
-        public string email { get; set; } = "Email";
+        public string Email { get; set; } = "Email";
+
+        [BsonElement("password")]
+        public string Password { get; set; } = "Password";
 
         [BsonElement("phoneNo")]
         public int PhoneNo { get; set; } = 0;

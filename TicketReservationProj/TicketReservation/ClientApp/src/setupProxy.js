@@ -12,7 +12,13 @@ const context = [
   "/api/train",
   "api/train",
   "/api/travelers",
-  "api/traveler",
+  "api/travelers",
+  "/api/travelers/login",
+  "api/travelers/login",
+  "/api/travelers/activate",
+  "api/travelers/activate",
+  "/api/travelers/deactivate",
+  "api/travelers/deactivate",
 ];
 
 module.exports = function (app) {

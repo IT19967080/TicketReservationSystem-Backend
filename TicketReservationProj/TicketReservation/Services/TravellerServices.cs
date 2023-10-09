@@ -26,6 +26,9 @@ namespace TicketReservation.Services
         //get traveller profile by NIC
         public async Task<Traveller> GetByNICAsync(string nic) => await _travellerCollection.Find(data => data.NIC == nic).FirstOrDefaultAsync();
 
+        //get traveller profile by email
+        public async Task<Traveller> GetByEmailAsync(string email) => await _travellerCollection.Find(data => data.Email == email).FirstOrDefaultAsync();
+
         //create traveller profile
         public async Task createTravellerProfile(Traveller traveller) => await _travellerCollection.InsertOneAsync(traveller);
 

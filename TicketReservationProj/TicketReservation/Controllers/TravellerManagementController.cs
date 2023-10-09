@@ -26,7 +26,7 @@ namespace TicketReservation.Controllers
         }
 
         // GET: api/travellers/{nic}
-        [HttpGet("{nic:length(24)}")]
+        [HttpGet("{nic}")]
         public async Task<ActionResult<Traveller>> GetByNIC(string nic)
         {
             var traveller = await _travellerServices.GetByNICAsync(nic);
@@ -42,7 +42,7 @@ namespace TicketReservation.Controllers
         }
 
         // PUT: api/travellers/{nic}
-        [HttpPut("{nic:length(24)}")]
+        [HttpPut("{nic}")]
         public async Task<IActionResult> UpdateProfile(string nic, Traveller traveller)
         {
             var existingTraveller = await _travellerServices.GetByNICAsync(nic);
@@ -52,11 +52,11 @@ namespace TicketReservation.Controllers
             }
             traveller.Id = existingTraveller.Id;
             await _travellerServices.updateTravellerProfile(nic, traveller);
-            return Ok("Updated Succesfully");
+            return Ok(traveller);
         }
 
         // DELETE: api/travellers/{nic}
-        [HttpDelete("{id}")]
+        [HttpDelete("{nic}")]
         public async Task<IActionResult> Delete(string nic)
         {
             var existingTraveller = await _travellerServices.GetByNICAsync(nic);
@@ -66,6 +66,58 @@ namespace TicketReservation.Controllers
             }
             await _travellerServices.deleteTravellerProfile(nic);
             return Ok("Deleted Succesfully");
+        }
+
+        // POST: api/travelers/login
+        [HttpPost("login")]
+        public async Task<IActionResult> login([FromBody] TravelerLogin travelerLogin)
+        {
+            var traveler = await _travellerServices.GetByEmailAsync(travelerLogin.Email);
+            if (traveler == null || traveler.Password != travelerLogin.Password)
+            {
+                return BadRequest("Incorrect credentials");
+            }
+            else
+            {
+                return Ok(traveler);
+            }
+
+        }
+
+        // PUT: api/travelers/activate
+        [HttpPut("activate/{nic}")]
+        public async Task<IActionResult> activateTraveler(string nic)
+        {
+            var traveler = await _travellerServices.GetByNICAsync(nic);
+            if (traveler == null)
+            {
+                return BadRequest("User does not exist");
+            }
+            else
+            {
+                traveler.IsActive = true;
+                await _travellerServices.updateTravellerProfile(nic, traveler);
+                return Ok(traveler);
+            }
+
+        }
+
+        // PUT: api/travelers/activate
+        [HttpPut("deactivate/{nic}")]
+        public async Task<IActionResult> deactivateTraveler(string nic)
+        {
+            var traveler = await _travellerServices.GetByNICAsync(nic);
+            if (traveler == null)
+            {
+                return BadRequest("User does not exist");
+            }
+            else
+            {
+                traveler.IsActive = false;
+                await _travellerServices.updateTravellerProfile(nic, traveler);
+                return Ok(traveler);
+            }
+
         }
 
 
