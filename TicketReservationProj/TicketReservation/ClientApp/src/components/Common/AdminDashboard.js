@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "../../Css/styles-ttrmAdmin.css";
+import styles from "../../styles/admin.module.css";
 
 import {
   Label,
@@ -16,7 +16,7 @@ import {
 
 import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
-import { ReactSession } from "react-client-session";
+//import { ReactSession } from "react-client-session";
 import AdminHeader from "./AdminHeader";
 
 function AdminDashboard() {
@@ -52,10 +52,10 @@ function AdminDashboard() {
   //   }, []);
 
   useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem("adminUser"));
-    if (userData == null || userData === undefined || userData === "") {
-      navigate("/admin-login");
-    }
+    // const userData = JSON.parse(sessionStorage.getItem("adminUser"));
+    // if (userData == null || userData === undefined || userData === "") {
+    //   navigate("/admin-login");
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

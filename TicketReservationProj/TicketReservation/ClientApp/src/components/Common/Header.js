@@ -29,14 +29,14 @@ function Header(){
                         navbarScroll
                     >   
                        
-                       <Nav.Link href="/FuelBookings" className={styles.navLink} >
-                            Bookings
+                       <Nav.Link href="/viewtrain" className={styles.navLink} >
+                            Train
                         </Nav.Link>
                         <Nav.Link href="/customer-report" className={styles.navLink} >
-                            Report
+                            Train Schedule
                         </Nav.Link>
                         <Nav.Link href="/addcomplaint" className={styles.navLink} >
-                            Complaints
+                            Traveller
                         </Nav.Link>
                         <Nav.Link href="/customer-profile"  className={styles.navLink}>
                             Profile

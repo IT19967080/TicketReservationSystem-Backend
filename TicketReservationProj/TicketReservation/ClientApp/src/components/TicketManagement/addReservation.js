@@ -9,6 +9,7 @@ import ComplaintHeader from './trainManagementHeader';
 
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import AgentHeader from '../Common/TravelAgentHeader';
 
 function AddTicket(){
   
@@ -143,7 +144,7 @@ function AddTicket(){
 
     return(
         <>
-        <ComplaintHeader/>
+        <AgentHeader/>
         <PageTitle pageTitle="Add New Reservation"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
@@ -155,8 +156,8 @@ function AddTicket(){
         }} 
         >
         <div className="card-body">
-        <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
-        <hr/> 
+
+    
         <div>
         <form onSubmit={submitSchedule} >
         <div class="form-group">
