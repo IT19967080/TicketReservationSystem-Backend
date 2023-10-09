@@ -12,6 +12,10 @@ import UserLogin from "./components/UserManagement/Login";
 import AddTicket from "./components/TicketManagement/addReservation";
 import ViewReservation from "./components/TicketManagement/viewReservation";
 import UpdateReservation from "./components/TicketManagement/updateReservation";
+import Dashboard from "./components/Common/BackOfficeDashboard";
+import AdminDashboard from "./components/Common/AdminDashboard";
+import BackDashboard from "./components/Common/BackOfficeDashboard";
+import TravelAgentDashboard from "./components/Common/TravelAgentDashboard";
 
 
 const AppRoutes = [
@@ -52,6 +56,7 @@ const AppRoutes = [
     path: '/login',
     element: <UserLogin/>
   },
+  {
     path: '/addticket',
     element: <AddTicket/>
   },
@@ -62,6 +67,16 @@ const AppRoutes = [
   {
     path: '/editreservation/:id',
     element: <UpdateReservation/>
+
+  },
+  {
+    path: '/backofficedashboard',
+    element: <BackDashboard/>
+
+  },
+  {
+    path: '/travelagentdashboard',
+    element: <TravelAgentDashboard/>
 
   }
 ];

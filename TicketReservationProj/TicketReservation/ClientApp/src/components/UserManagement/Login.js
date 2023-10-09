@@ -11,30 +11,40 @@ import { useNavigate } from "react-router-dom";
 function UserLogin(){
 
     const navigate = useNavigate();
-    const [email , setemail] = useState("");
+    const [username , setusername] = useState("");
     const [password , setpassword] = useState("");
 
     function login() {
-        axios.post("http://localhost:8070/customers/login" , {email,password}).then((res) =>{
-            if(res.data.status === true){
-            
-                sessionStorage.setItem("customer" , email );
-                console.log(res.data.userData);
-                console.log(res.data.msg);
-                sessionStorage.setItem("CusId" , res.data.userData._id );
-                navigate("/dashboard");
-            }
-            else if(res.data.status === false){
-                console.log(res.data.msg);
-                alert("Check Credentials");
-            }
-            else{
-                console.log("err");
-            }
-        }).catch((err) =>{
-            console.log(err);
-           
-        })
+
+      const newCus = {
+        password,
+        username,
+      }
+
+      navigate("/backofficedashboard");
+        // axios.post(`api/userdata`,newCus).then((res) =>{
+
+        //     console.log(res)
+        //     navigate("/dashboard");
+        //    // if(res.data.status === true){
+          
+        //         // sessionStorage.setItem("customer" , email );
+        //         // console.log(res.data.userData);
+        //         // console.log(res.data.msg);
+        //         // sessionStorage.setItem("CusId" , res.data.userData._id );
+        //         // navigate("/dashboard");
+        //     //}
+        //     // else if(res.data.status === false){
+        //     //     console.log(res.data.msg);
+        //     //     alert("Check Credentials");
+        //     // }
+        //     // else{
+        //     //     console.log("err");
+        //     // }
+        // }).catch((err) =>{
+        //     console.log(err);
+        //     alert(err)
+        // })
     }
     return(
         <>
@@ -43,15 +53,15 @@ function UserLogin(){
                 <div className = {styles.loginForm}>
                 <Form>
                 <FormGroup className={styles.form}>
-                    <Label for="email">Email</Label>
+                    <Label for="email">UserName</Label>
                     <Input
                     id="email"
                     className={styles.input}
                     name="email"
                     placeholder="Enter your email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setemail(e.target.value)}
+                    value={username}
+                    onChange={(e) => setusername(e.target.value)}
                     required
                     />
                 </FormGroup>

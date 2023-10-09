@@ -16,15 +16,15 @@ function UserRegistration() {
 
     const navigate = useNavigate();
     const [email, setemail] = useState("");
-    const [name, setname] = useState("");
+    const [username, setusername] = useState("");
     const [surname, setsurname] = useState("");
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("Admin");
     const [password, setpassword] = useState("");
     const [confPassword, setconfPassword] = useState("");
 
     const demo = () => {
       setemail("rishitha@gmail.com");
-      setname("Rishitha");
+      setusername("Rishitha");
       setsurname("Dilshan");
 
       setpassword("rishitha1");
@@ -32,58 +32,62 @@ function UserRegistration() {
 
     };
 
-    const submit = (e) => {
+    async function  submit(e){
       e.preventDefault();
 
-    //   const vehicles = [{
-    //     vehicleType : vehicleType ,
-    //     vehicleChassis : vehicleChassis ,
-    //     vehicleNumber : vehicleNumber
-    //   }]
+   
       
       const newCus = {
         email,
-        name,
-        surname,
+        username,
         role,
         password
       }
-      axios
-        .post("http://localhost:8070/customers/checkEmail", {
-          email,
-        })
-        .then((res) => {
-          if (res.data.status) {
-            alert("An account with the same email exists!");
-          } else {
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+ 
             if (password === confPassword) {
-              axios.post("http://localhost:8070/customers/register" , newCus ).then(() =>{
-                
-                toast.success('Registration Succesful!', {
-                  position: "bottom-right",
-                  autoClose: 5000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  });
-                setTimeout(() =>{
-                  e.target.reset();
-                  navigate("/customer-login");
-                } , 4000)
+              await axios.post(`api/userdata`,newCus,{
+                headers: headers,
+                "Content-Type": "application/json",
+                credentials: "include",
+                mode: "cors",
+              } ).then((res) =>{
+                if(res.data.status=="Error"){
+                  alert(res.data.message)
+                 }else{
+                  toast.success('Registration Succesful!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+                  setTimeout(() =>{
+                    e.target.reset();
+                    //navigate("/customer-login");
+                  } , 1000)
+                  setRole("Admin");
+                  setemail("");
+                  setpassword("");
+                  setusername("");
+                  setconfPassword("")
+                 }
                 
               }).catch((err) =>{
                 alert(err);
+                console.log(err)
               })
             } else {
               alert("Password does not match!");
             }
-          }
-        })
-        .catch((e) => {
-          alert(e);
-        });
+          
+        
+      
     };
   
 
@@ -99,32 +103,20 @@ function UserRegistration() {
               <h4>Personal Information</h4>
               <hr/>
               <FormGroup>
-                <Label for="name">Name</Label>
+                <Label for="name">User Name</Label>
                 <Input
                   id="name"
                   className={styles.input}
                   name="name"
-                  placeholder="Enter your name"
+                  placeholder="Enter user name"
                   type="text"
-                  value={name}
-                  onChange={(e) => setname(e.target.value)}
+                  value={username}
+                  onChange={(e) => setusername(e.target.value)}
                   required
                 />
               </FormGroup>
 
-              <FormGroup>
-                <Label for="name">Surname</Label>
-                <Input
-                  id="surname"
-                  className={styles.input}
-                  name="name"
-                  placeholder="Enter your surname"
-                  type="text"
-                  value={surname}
-                  onChange={(e) => setsurname(e.target.value)}
-                  required
-                />
-              </FormGroup>
+              
 
               <FormGroup>
                 <Label for="name">Email</Label>
