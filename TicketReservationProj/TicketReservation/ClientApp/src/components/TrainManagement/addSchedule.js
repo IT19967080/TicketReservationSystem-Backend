@@ -5,7 +5,7 @@ import axios from "axios";
 import React from "react";
 import "../../styles/addcomplaint.module.css"
 import PageTitle from '../PageTitle';
-import ComplaintHeader from './trainManagementHeader';
+import TrainManagementHeader from './trainManagementHeader';
 
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -145,7 +145,7 @@ function AddSchedule(){
 
     return(
         <>
-        <ComplaintHeader/>
+        <TrainManagementHeader/>
         <PageTitle pageTitle="Add New Schedule"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
@@ -157,8 +157,7 @@ function AddSchedule(){
         }} 
         >
         <div className="card-body">
-        <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
-        <hr/> 
+       
         <div>
         <form onSubmit={submitSchedule} >
         <div class="form-group">

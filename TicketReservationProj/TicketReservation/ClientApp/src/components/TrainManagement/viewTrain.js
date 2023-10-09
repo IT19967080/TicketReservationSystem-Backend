@@ -161,7 +161,7 @@ const ViewTrain = () => {
           <th scope="col">Train Type</th>
           <th scope="col">Driver</th>
           <th scope="col">Capacity</th>
-          <th scope="col">Status</th>
+        
           <th scope="col">Actions</th>
          </tr>
         </thead>
@@ -174,7 +174,7 @@ const ViewTrain = () => {
           <td>{data.trianType}</td>
           <td>{data.driverName}</td>
           <td>{data.capacity}</td>
-          <td>{data.status}</td>
+    
           <td>     
          
           <a onClick = {()=>{

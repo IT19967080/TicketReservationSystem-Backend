@@ -12,6 +12,8 @@ namespace ticketreservation.Data
         public string Connection { get; set; }
 		    public string TravellerCollectionName { get; set; }
         public string TicketBookingCollectionName { get; set; }
+        public string UserManagemntCollectionName { get; set; }
+        
     }
 }
 

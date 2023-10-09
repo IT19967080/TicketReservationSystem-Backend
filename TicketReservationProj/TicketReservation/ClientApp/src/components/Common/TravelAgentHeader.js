@@ -1,25 +1,26 @@
 import React from "react";
 import { BiLogOut } from "react-icons/bi";
-import { Navbar , Container , Nav  } from "react-bootstrap";
+import { Navbar , Container , Nav , NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/common.module.css";
 
-function TrainManagementHeader(){
+
+function AgentHeader(){
 
     const navigate = useNavigate();
-    function logOut(){
-        sessionStorage.clear();
-        navigate('/customer-login');
-    }
- 
+     function logOut(){
+         sessionStorage.clear();
+         navigate('/customer-login');
+     }
     return(
         
-            <Navbar            
+            <Navbar       
             sticky="top"
             bg="light"
             expand="lg"
             variant="light"
-            className={styles.navbar}>
+            className={styles.navbar}
+            >
                 <Container fluid>
                     <Navbar.Brand href="/dashboard">Home</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -30,14 +31,14 @@ function TrainManagementHeader(){
                         navbarScroll
                     >   
                        
-                       <Nav.Link href="/addtrain"  className={styles.navLink} >
-                            Add Trian
-                        </Nav.Link>
-                        <Nav.Link href="/viewtrain"  className={styles.navLink} >
-                            Trian Management
+                       <Nav.Link href="/viewschedule" className={styles.navLink} >
+                            Ticket Booking
                         </Nav.Link>
                        
-                        <Nav.Link href="/customer-profile"  className={styles.navLink} >
+                        <Nav.Link href="/addcomplaint" className={styles.navLink} >
+                            Traveller
+                        </Nav.Link>
+                        <Nav.Link href="/register"  className={styles.navLink}>
                             Profile
                         </Nav.Link>
 
@@ -54,4 +55,4 @@ function TrainManagementHeader(){
     )
 }
 
-export default TrainManagementHeader;
+export default AgentHeader;

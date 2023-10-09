@@ -123,8 +123,8 @@ function AddTrain(){
         }} 
         >
         <div className="card-body">
-        <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
-        <hr/> 
+
+     
         <div>
         <form onSubmit={submitTrain} >
         
@@ -153,6 +153,7 @@ function AddTrain(){
           <input  value={drivername} onChange={(e)=>{setdrivername(e.target.value)}} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Driver Name" title="follow requested format Ex:([name@example.com])"  required="required" />
         </div>
 
+        <br></br>
         <br></br>
         
         <div class="form-group">

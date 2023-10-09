@@ -30,13 +30,14 @@ function TrainManagementHeader(){
                         navbarScroll
                     >   
                        
-                       <Nav.Link href="/addtrain"  className={styles.navLink} >
-                            Add Trian
+                      
+                        <Nav.Link href="/addschedule"  className={styles.navLink} >
+                            Schedule Management
                         </Nav.Link>
-                        <Nav.Link href="/viewtrain"  className={styles.navLink} >
-                            Trian Management
+                        <Nav.Link href="/viewschedule"  className={styles.navLink} >
+                            Add Schedule
                         </Nav.Link>
-                       
+                      
                         <Nav.Link href="/customer-profile"  className={styles.navLink} >
                             Profile
                         </Nav.Link>
