@@ -12,6 +12,8 @@ import UserLogin from "./components/UserManagement/Login";
 import AddTicket from "./components/TicketManagement/addReservation";
 import ViewReservation from "./components/TicketManagement/viewReservation";
 import UpdateReservation from "./components/TicketManagement/updateReservation";
+  import CreateTravelerProfile from "./components/TravelerManagement/CreateTravelerProfile";
+import EditTravelerProfile from "./components/TravelerManagement/EditTravelerProfile";
 
 
 const AppRoutes = [
@@ -63,7 +65,15 @@ const AppRoutes = [
     path: '/editreservation/:id',
     element: <UpdateReservation/>
 
-  }
+  },
+    {
+    path: "/create-traveler-profile",
+    element: <CreateTravelerProfile />,
+  },
+  {
+    path: "/edit-traveler-profile",
+    element: <EditTravelerProfile />,
+  },
 ];
 
 export default AppRoutes;
