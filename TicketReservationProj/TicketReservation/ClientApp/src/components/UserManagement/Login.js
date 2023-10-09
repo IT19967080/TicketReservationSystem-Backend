@@ -20,7 +20,7 @@ function UserLogin(){
         password,
         username,
       }
-
+      
       navigate("/backofficedashboard");
         // axios.post(`api/userdata`,newCus).then((res) =>{
 
