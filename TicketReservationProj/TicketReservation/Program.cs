@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
+
+builder.Services.AddSingleton<TravellerServices>();
 builder.Services.AddAuthentication().AddCookie("cookie");
 
 builder.Services.AddAuthorization();
@@ -54,7 +56,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

@@ -10,6 +10,7 @@ namespace ticketreservation.Data
         public string UserCollectionName { get; set; }
         public string DatabaseName { get; set; }
         public string Connection { get; set; }
+		    public string TravellerCollectionName { get; set; }
         public string TicketBookingCollectionName { get; set; }
         public string UserManagemntCollectionName { get; set; }
         
