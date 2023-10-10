@@ -19,6 +19,7 @@ import TravelAgentDashboard from "./components/Common/TravelAgentDashboard";
 
 import CreateTravelerProfile from "./components/TravelerManagement/CreateTravelerProfile";
 import EditTravelerProfile from "./components/TravelerManagement/EditTravelerProfile";
+import ViewAllTravelerProfiles from "./components/Common/ViewAllTravelerProfiles";
 
 const AppRoutes = [
   {
@@ -66,21 +67,17 @@ const AppRoutes = [
     element: <ViewReservation />,
   },
   {
-    path: '/editreservation/:id',
-    element: <UpdateReservation/>
-
+    path: "/editreservation/:id",
+    element: <UpdateReservation />,
   },
   {
-    path: '/backofficedashboard',
-    element: <BackDashboard/>
-
+    path: "/backofficedashboard",
+    element: <BackDashboard />,
   },
   {
-    path: '/travelagentdashboard',
-    element: <TravelAgentDashboard/>
-
-  }
-    ,
+    path: "/travelagentdashboard",
+    element: <TravelAgentDashboard />,
+  },
   {
     path: "/create-traveler-profile",
     element: <CreateTravelerProfile />,
@@ -88,6 +85,10 @@ const AppRoutes = [
   {
     path: "/edit-traveler-profile",
     element: <EditTravelerProfile />,
+  },
+  {
+    path: "/view-traveler-profiles",
+    element: <ViewAllTravelerProfiles />,
   },
 ];
 
