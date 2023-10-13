@@ -1,4 +1,10 @@
-﻿namespace TicketReservation
+﻿/*
+ * File: UserDto.cs
+ * Data Transfer Object (DTO) for user-related information.
+ * Description: Main entry point for the ASP.NET Core application.
+ */
+
+namespace TicketReservation
 {
     public class UserDto
     {

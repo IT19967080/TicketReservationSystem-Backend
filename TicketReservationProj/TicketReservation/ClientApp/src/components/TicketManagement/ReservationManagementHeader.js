@@ -1,15 +1,17 @@
 import React from "react";
 import { BiLogOut } from "react-icons/bi";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/common.module.css";
-function Header() {
+
+function ReservationManagementHeader() {
 
     const navigate = useNavigate();
     function logOut() {
         sessionStorage.clear();
         navigate('/customer-login');
     }
+
     return (
 
         <Navbar
@@ -17,8 +19,7 @@ function Header() {
             bg="light"
             expand="lg"
             variant="light"
-            className={styles.navbar}
-        >
+            className={styles.navbar}>
             <Container fluid>
                 <Navbar.Brand href="/dashboard">Home</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -29,16 +30,14 @@ function Header() {
                         navbarScroll
                     >
 
+                        <Nav.Link href="/addtrain" className={styles.navLink} >
+                            Add Reservation
+                        </Nav.Link>
                         <Nav.Link href="/viewtrain" className={styles.navLink} >
-                            Train
+                            Reservation Infomation
                         </Nav.Link>
-                        <Nav.Link href="/customer-report" className={styles.navLink} >
-                            Train Schedule
-                        </Nav.Link>
-                        <Nav.Link href="/" className={styles.navLink} >
-                            Traveller
-                        </Nav.Link>
-                        <Nav.Link href="/customer-profile" className={styles.navLink}>
+
+                        <Nav.Link href="/customer-profile" className={styles.navLink} >
                             Profile
                         </Nav.Link>
 
@@ -55,4 +54,4 @@ function Header() {
     )
 }
 
-export default Header;
+export default ReservationManagementHeader;

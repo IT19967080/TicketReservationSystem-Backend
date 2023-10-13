@@ -1,9 +1,16 @@
-﻿using System;
+﻿/*
+ * File: TicketBookingServices.cs
+ * Description: Service class for managing ticket booking operations.
+ */
+
+using System;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ticketreservation.Data;
 using ticketreservation.Models;
 using TicketReservation.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TicketReservation.Services
 {
@@ -16,38 +23,28 @@ namespace TicketReservation.Services
             var mongoClient = new MongoClient(settings.Value.Connection);
             var mongoDb = mongoClient.GetDatabase(settings.Value.DatabaseName);
             _ticketBookingCollection = mongoDb.GetCollection<TicketBooking>(settings.Value.TicketBookingCollectionName);
-
         }
 
-
-        // get all train schedules
-
+        // Get all ticket bookings
         public async Task<List<TicketBooking>> GetAsync() => await _ticketBookingCollection.Find(_ => true).ToListAsync();
 
-
-        // get train schedule byId
-
+        // Get ticket booking by ID
         public async Task<TicketBooking> GetAsync(string id) =>
             await _ticketBookingCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        //add new schedule
-
-
+        // Add a new ticket booking
         public async Task createAsync(TicketBooking newTrian) =>
             await _ticketBookingCollection.InsertOneAsync(newTrian);
 
-
-        //update train schedule
-
-        public async Task updateAsync(String id, TicketBooking updateTrian) =>
+        // Update a ticket booking
+        public async Task updateAsync(string id, TicketBooking updateTrian) =>
             await _ticketBookingCollection.ReplaceOneAsync(x => x.Id == id, updateTrian);
 
-        //delete train schedule
-
-        public async Task deleteAsync(String id) =>
+        // Delete a ticket booking
+        public async Task deleteAsync(string id) =>
             await _ticketBookingCollection.DeleteOneAsync(x => x.Id == id);
 
-
+        // Get the count of reservations by reference ID
         public async Task<int> GetReservationCountByReferenceIdAsync(string referenceId)
         {
             var filter = Builders<TicketBooking>.Filter.Eq("ReferenceId", referenceId);
@@ -56,7 +53,3 @@ namespace TicketReservation.Services
         }
     }
 }
-
-
-
-

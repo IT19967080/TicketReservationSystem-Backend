@@ -1,17 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "../../styles/fuelStation.module.css";
 
 import {
-  Label,
-  Input,
-  FormGroup,
   Row,
   Col,
   Card,
-  CardBody,
-  CardTitle,
 } from "reactstrap";
 
 import Header from "./Header";

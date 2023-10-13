@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/customer.module.css";
-import { Button } from "reactstrap";
 import axios from "axios";
 
 function ViewAllTravelerProfiles() {

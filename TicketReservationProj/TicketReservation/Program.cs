@@ -1,32 +1,35 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿/*
+ * File: Program.cs
+ * Description: Main entry point for the ASP.NET Core application.
+ */
+
+using Microsoft.Extensions.DependencyInjection;
 using ticketreservation.Data;
 using ticketreservation.Services;
 using TicketReservation.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-
 using System.Text;
 
+// Create a new instance of the WebApplicationBuilder.
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configure services and settings.
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("ConnectionStrings"));
 
-
+// Singleton services for dependency injection.
 builder.Services.AddSingleton<TravellerServices>();
 builder.Services.AddAuthentication().AddCookie("cookie");
-
 builder.Services.AddAuthorization();
-
 builder.Services.AddSingleton<TrainServices>();
-
 builder.Services.AddSingleton<TrainDataServices>();
 builder.Services.AddSingleton<TicketBookingServices>();
 builder.Services.AddSingleton<AuthServices>();
 builder.Services.AddSingleton<UserManagemntServices>();
 builder.Services.AddControllersWithViews();
 
+// Configure JWT Bearer authentication.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -40,8 +43,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
-
+// Build the application.
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,11 +59,13 @@ app.UseAuthorization();
 app.UseStaticFiles();
 app.UseRouting();
 
+// Configure controller routes.
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html"); ;
+// Map fallback to an HTML file.
+app.MapFallbackToFile("index.html");
 
+// Start the application.
 app.Run();
-

@@ -1,4 +1,9 @@
-﻿namespace JwtWebApiTutorial
+﻿/*
+ * File: RefreshToken.cs
+ * Description: Represents a refresh token used for token-based authentication.
+ */
+
+namespace JwtWebApiTutorial
 {
     public class RefreshToken
     {

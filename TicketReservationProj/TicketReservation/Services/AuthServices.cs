@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * File: AuthServices.cs
+ * Description: Service for user authentication and authorization.
+ */
+
+
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -50,20 +56,22 @@ namespace TicketReservation.Services
 
             await _userDataCollection.InsertOneAsync(user);
         }
-
+        
+     
         public async Task<string> Login(UserDto request)
         {
+            // Find the user by username
             var user = await _userDataCollection.Find(u => u.Username == request.Username).FirstOrDefaultAsync();
             if (user == null)
             {
                 throw new Exception("User not found.");
             }
-
+            // Verify the password
             if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 throw new Exception("Wrong password.");
             }
-
+            // Create and return an authentication token
             string token = CreateToken(request.Username, request.Role);
 
             //var refreshToken = GenerateRefreshToken();
@@ -72,6 +80,7 @@ namespace TicketReservation.Services
             return token;
         }
 
+        // Generate a new refresh token
         private RefreshToken GenerateRefreshToken()
         {
             var refreshToken = new RefreshToken
@@ -84,6 +93,8 @@ namespace TicketReservation.Services
             return refreshToken;
         }
 
+
+        // Verify password
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
@@ -93,6 +104,7 @@ namespace TicketReservation.Services
             }
         }
 
+        // Create an authentication token
         private string CreateToken(String username , String role)
         {
             List<Claim> claims = new List<Claim>
@@ -116,6 +128,7 @@ namespace TicketReservation.Services
             return jwt;
         }
 
+        // Create a password hash
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
