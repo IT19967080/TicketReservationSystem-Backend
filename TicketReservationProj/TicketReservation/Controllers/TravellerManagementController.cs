@@ -4,6 +4,7 @@ using TicketReservation.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+
 namespace TicketReservation.Controllers
 {
     [Route("api/travelers")]
@@ -18,6 +19,7 @@ namespace TicketReservation.Controllers
         }
 
         // GET: api/travellers
+        //Get all registered traveler accounts
         [HttpGet]
         public async Task<ActionResult<List<Traveller>>> GetAll()
         {
@@ -26,6 +28,7 @@ namespace TicketReservation.Controllers
         }
 
         // GET: api/travellers/{nic}
+        //Get a traveler profile by NIC
         [HttpGet("{nic}")]
         public async Task<ActionResult<Traveller>> GetByNIC(string nic)
         {
@@ -34,6 +37,7 @@ namespace TicketReservation.Controllers
         }
 
         // POST: api/travellers
+        //Create new traveler profile
         [HttpPost]
         public async Task<IActionResult> CreateProfile([FromBody] Traveller traveller)
         {
@@ -42,6 +46,7 @@ namespace TicketReservation.Controllers
         }
 
         // PUT: api/travellers/{nic}
+        //Update existing traveler profile
         [HttpPut("{nic}")]
         public async Task<IActionResult> UpdateProfile(string nic, Traveller traveller)
         {
@@ -56,6 +61,7 @@ namespace TicketReservation.Controllers
         }
 
         // DELETE: api/travellers/{nic}
+        // Delete an existing traveler profile
         [HttpDelete("{nic}")]
         public async Task<IActionResult> Delete(string nic)
         {
@@ -69,6 +75,7 @@ namespace TicketReservation.Controllers
         }
 
         // POST: api/travelers/login
+        //Login to a traveler account
         [HttpPost("login")]
         public async Task<IActionResult> login([FromBody] TravelerLogin travelerLogin)
         {
@@ -85,6 +92,7 @@ namespace TicketReservation.Controllers
         }
 
         // PUT: api/travelers/activate
+        // Activate a deactivated traveler account
         [HttpPut("activate/{nic}")]
         public async Task<IActionResult> activateTraveler(string nic)
         {
@@ -103,6 +111,7 @@ namespace TicketReservation.Controllers
         }
 
         // PUT: api/travelers/activate
+        //Deactivate an existing traveler account
         [HttpPut("deactivate/{nic}")]
         public async Task<IActionResult> deactivateTraveler(string nic)
         {
