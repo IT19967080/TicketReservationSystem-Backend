@@ -1,10 +1,8 @@
 import { useState } from "react";
-import Header from "../Common/Header";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/customer.module.css"
 import common from "../../styles/common.module.css";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
