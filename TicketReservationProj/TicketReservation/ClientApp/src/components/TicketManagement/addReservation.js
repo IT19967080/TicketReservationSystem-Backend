@@ -5,8 +5,6 @@ import axios from "axios";
 import React from "react";
 import "../../styles/addcomplaint.module.css"
 import PageTitle from '../PageTitle';
-import ComplaintHeader from './trainManagementHeader';
-
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AgentHeader from '../Common/TravelAgentHeader';
@@ -167,7 +165,7 @@ function AddTicket(){
         <br></br>
       
         <div class="form-group">
-          <label for="exampleFormControlInput1" style={{float:"left"}}>Name</label>
+          <label for="exampleFormControlInput1" style={{float:"left"}}>Customer Name</label>
           <input  value={name} onChange={(e)=>{setname(e.target.value)}} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" title="follow requested format Ex:([name@example.com])"  required="required" />
         </div>
         <br></br>

@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom"
 import PageTitle from "../PageTitle";
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import TrainManagementHeader from "./trainManagementHeader";
+import AgentHeader from "../Common/TravelAgentHeader";
 
 const UpdateReservation = () => {
 
@@ -98,7 +98,7 @@ const UpdateReservation = () => {
 
   return (
     <>
-        <TrainManagementHeader/>
+        <AgentHeader/>
         <PageTitle pageTitle="Update New Reservation"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
@@ -110,8 +110,7 @@ const UpdateReservation = () => {
         }} 
         >
         <div className="card-body">
-        <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
-        <hr/> 
+        
         <div>
         <form onSubmit={UpdateReservation} >
 

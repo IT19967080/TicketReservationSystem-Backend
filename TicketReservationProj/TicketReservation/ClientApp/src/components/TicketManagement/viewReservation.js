@@ -4,12 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
-import ComplaintHeader from './trainManagementHeader';
 import PageTitle from '../PageTitle';
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {Modal,Button} from 'react-bootstrap'
-import TrainManagementHeader from './trainManagementHeader';
+import AgentHeader from '../Common/TravelAgentHeader';
 library.add(  faPen);
 
   
@@ -137,10 +136,12 @@ const ViewReservation = () => {
     filterData = reservationData.filter((value)=>{
       
       return(
-        value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
-        value.dateofComplaint.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.complaintDetails.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.reason.toLowerCase().includes(searchVal.toLowerCase())   
+        value.trainName.toLowerCase().includes(searchVal.toLowerCase()) || 
+        value.date.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.name.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.referenceId.toLowerCase().includes(searchVal.toLowerCase()) ||    
+        value.time.toLowerCase().includes(searchVal.toLowerCase()) 
+        
       )     
     })
     console.log(filterData)
@@ -150,7 +151,7 @@ const ViewReservation = () => {
   return (
     <>
 
-     <TrainManagementHeader/>
+     <AgentHeader/>
      <PageTitle pageTitle="Reservation Information"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>

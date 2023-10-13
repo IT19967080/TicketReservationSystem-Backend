@@ -1,13 +1,21 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:7892",
+      "sslPort": 44348
+    }
+  },
   "profiles": {
     "TicketReservation": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:7238;http://localhost:5250",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-      },
-      "applicationUrl": "https://localhost:7238;http://localhost:5250"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -27,14 +35,6 @@
         "ASPNETCORE_URLS": "https://localhost:7238;http://localhost:5250"
       },
       "distributionName": ""
-    }
-  },
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:7892",
-      "sslPort": 44348
     }
   }
 }

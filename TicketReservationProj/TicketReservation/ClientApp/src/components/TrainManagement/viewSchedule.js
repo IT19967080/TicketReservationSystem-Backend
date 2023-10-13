@@ -10,6 +10,7 @@ import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import {Modal,Button} from 'react-bootstrap'
 import TrainManagementHeader from './trainManagementHeader';
+import TrainScheduleManagementHeader from './trainScheduleManagementHeader';
 library.add(  faPen);
 
   
@@ -87,10 +88,12 @@ const ViewSchedule = () => {
     filterData = trainschedule.filter((value)=>{
       
       return(
-        value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
-        value.dateofComplaint.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.complaintDetails.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.reason.toLowerCase().includes(searchVal.toLowerCase())   
+        value.trainName.toLowerCase().includes(searchVal.toLowerCase()) || 
+        value.date.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.startTime.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.endTime.toLowerCase().includes(searchVal.toLowerCase()) || 
+        value.source.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.destination.toLowerCase().includes(searchVal.toLowerCase()) 
       )     
     })
     console.log(filterData)
@@ -100,7 +103,7 @@ const ViewSchedule = () => {
   return (
     <>
 
-     <TrainManagementHeader/>
+     <TrainScheduleManagementHeader/>
      <PageTitle pageTitle="Train Schedules"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
     <br></br><br></br>

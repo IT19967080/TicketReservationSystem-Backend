@@ -15,7 +15,7 @@ function AddTrain(){
     const [trainname, settrainname] = useState("");
     const [drivername, setdrivername] = useState("");
     const [capacity,setcapacity] = useState("");
-    const [triantype,settriantype] = useState("Express");
+    const [traintype,settriantype] = useState("Express");
     var   [status, setstatus] = useState(false);
 
     // const [handletextarea, sethandletextarea] = useState(false)
@@ -44,7 +44,7 @@ function AddTrain(){
         if (trainname.length >= 1) {
           setSucessfull(false);
           const newTrainData = {
-            triantype,
+            traintype,
             trainname,
             drivername,
             capacity,
@@ -135,7 +135,7 @@ function AddTrain(){
         <br></br>
         <div class="form-group">
           <label for="exampleFormControlSelect1" style={{float:"left"}}>Train Type</label>
-          <select value={triantype} onChange={(e)=>{settriantype(e.target.value)}} class="form-control form-select" required>
+          <select value={traintype} onChange={(e)=>{settriantype(e.target.value)}} class="form-control form-select" required>
           <option>Express</option>
           <option>local</option>
           <option>freight</option>
@@ -155,7 +155,7 @@ function AddTrain(){
 
         <br></br>
         <br></br>
-        
+
         <div class="form-group">
           
         <button style={{width : "100%", backgroundColor: "#ff762e"}} type="submit"  className="btn btn-primary  ">Add Train</button>

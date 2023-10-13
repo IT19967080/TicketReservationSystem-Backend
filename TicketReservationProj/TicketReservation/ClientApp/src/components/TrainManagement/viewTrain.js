@@ -108,10 +108,10 @@ const ViewTrain = () => {
     filterData = traindata.filter((value)=>{
       
       return(
-        value.email.toLowerCase().includes(searchVal.toLowerCase()) || 
-        value.dateofComplaint.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.complaintDetails.toLowerCase().includes(searchVal.toLowerCase()) ||
-        value.reason.toLowerCase().includes(searchVal.toLowerCase())   
+        value.trainName.toLowerCase().includes(searchVal.toLowerCase()) || 
+        value.capacity.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.driverName.toLowerCase().includes(searchVal.toLowerCase()) ||
+        value.trianType.toLowerCase().includes(searchVal.toLowerCase())   
       )     
     })
     console.log(filterData)
@@ -157,9 +157,9 @@ const ViewTrain = () => {
         <thead  style={{backgroundColor: '#082344',color: 'white',textalign: 'left',fontweight: 'bold'}}>
           <tr>
 
-          <th scope="col">TrainName</th>
+          <th scope="col">Train Name</th>
           <th scope="col">Train Type</th>
-          <th scope="col">Driver</th>
+          <th scope="col">Driver Name</th>
           <th scope="col">Capacity</th>
         
           <th scope="col">Actions</th>
@@ -171,7 +171,7 @@ const ViewTrain = () => {
         return(
           <tr style={{}}>
           <td>{data.trainName}</td>
-          <td>{data.trianType}</td>
+          <td>{data.trainType}</td>
           <td>{data.driverName}</td>
           <td>{data.capacity}</td>
     

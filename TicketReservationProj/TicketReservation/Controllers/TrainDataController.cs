@@ -1,8 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File: TrainDataController.cs
+ * Description: Controller for managing train data operations.
+ */
+
+using Microsoft.AspNetCore.Mvc;
 using ticketreservation.Models; // Make sure to import your model namespace
 using ticketreservation.Services;
 using TicketReservation.Models;
 using TicketReservation.Services;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ticketreservation.Controllers
 {
@@ -23,6 +32,7 @@ namespace ticketreservation.Controllers
         [HttpGet]
         public async Task<ActionResult<List<TrainData>>> Get()
         {
+            // Retrieve a list of train data
             var trains = await _trainDataServices.GetAsync();
             return Ok(trains);
         }
@@ -31,6 +41,7 @@ namespace ticketreservation.Controllers
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<TrainData>> GetById(string id)
         {
+            // Retrieve train data by its ID
             var train = await _trainDataServices.GetAsync(id);
             if (train == null)
             {
@@ -39,6 +50,7 @@ namespace ticketreservation.Controllers
             return Ok(train);
         }
 
+        // POST: api/traindata
         public async Task<IActionResult> Create(TrainData newTrain)
         {
             try
@@ -70,27 +82,31 @@ namespace ticketreservation.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, TrainData updatedTrain)
         {
+            // Retrieve the existing train data by ID
             var existingTrain = await _trainDataServices.GetAsync(id);
             if (existingTrain == null)
             {
                 return NotFound();
             }
+            // Update the train data
             updatedTrain.Id = existingTrain.Id;
             await _trainDataServices.updateAsync(id, updatedTrain);
-            return Ok("Updated Succesfully");
+            return Ok("Updated Successfully");
         }
 
         // DELETE: api/traindata/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
+            // Retrieve the existing train data by ID
             var existingTrainData = await _trainDataServices.GetAsync(id);
             if (existingTrainData == null)
             {
                 return NotFound();
             }
+            // Delete the train data
             await _trainDataServices.deleteAsync(id);
-            return Ok("Deleted Succesfully");
+            return Ok("Deleted Successfully");
         }
     }
 }

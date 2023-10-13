@@ -1,7 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*
+ * File: TicketBookingController.cs 
+ * Description: Controller for managing ticket booking operations.
+ */
+
+using Microsoft.AspNetCore.Mvc;
 using ticketreservation.Models; // Make sure to import your model namespace
 using ticketreservation.Services;
 using TicketReservation.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace ticketreservation.Controllers
 {
@@ -16,18 +24,20 @@ namespace ticketreservation.Controllers
             _ticketServices = ticketServices;
         }
 
-        // GET: api/train
+        // GET: api/ticket
         [HttpGet]
         public async Task<ActionResult<List<TicketBooking>>> Get()
         {
+            // Retrieve a list of tickets
             var tickets = await _ticketServices.GetAsync();
             return Ok(tickets);
         }
 
-        // GET: api/train/{id}
+        // GET: api/ticket/{id}
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<TicketBooking>> GetById(string id)
         {
+            // Retrieve a ticket by its ID
             var ticket = await _ticketServices.GetAsync(id);
             if (ticket == null)
             {
@@ -36,7 +46,7 @@ namespace ticketreservation.Controllers
             return Ok(ticket);
         }
 
-        // POST: api/train
+        // POST: api/ticket
         [HttpPost]
         public async Task<IActionResult> Create(TicketBooking ticket)
         {
@@ -53,39 +63,43 @@ namespace ticketreservation.Controllers
 
                 return StatusCode(StatusCodes.Status200OK, customResponse);
             }
-            else {
+            else
+            {
+                // Create a new ticket reservation
                 await _ticketServices.createAsync(ticket);
                 return CreatedAtAction(nameof(Get), new { id = ticket.Id }, ticket);
             }
-         
-
         }
 
-        // PUT: api/train/{id}
+        // PUT: api/ticket/{id}
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, TicketBooking updatedTicket)
         {
+            // Retrieve the existing ticket by ID
             var existingTicket = await _ticketServices.GetAsync(id);
             if (existingTicket == null)
             {
                 return NotFound();
             }
+            // Update the ticket
             updatedTicket.Id = existingTicket.Id;
             await _ticketServices.updateAsync(id, updatedTicket);
-            return Ok("Updated Succesfully");
+            return Ok("Updated Successfully");
         }
 
-        // DELETE: api/train/{id}
+        // DELETE: api/ticket/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
+            // Retrieve the existing ticket by ID
             var existingTicket = await _ticketServices.GetAsync(id);
             if (existingTicket == null)
             {
                 return NotFound();
             }
+            // Delete the ticket
             await _ticketServices.deleteAsync(id);
-            return Ok("Deleted Succesfully");
+            return Ok("Deleted Successfully");
         }
     }
 }

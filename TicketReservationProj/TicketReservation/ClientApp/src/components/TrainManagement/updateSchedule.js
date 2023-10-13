@@ -8,6 +8,7 @@ import PageTitle from "../PageTitle";
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import TrainManagementHeader from "./trainManagementHeader";
+import TrainScheduleManagementHeader from "./trainScheduleManagementHeader";
 
 const UpdateSchedule = () => {
 
@@ -76,8 +77,8 @@ const UpdateSchedule = () => {
 
   return (
     <>
-        <TrainManagementHeader/>
-        <PageTitle pageTitle="Add New Complaint"/> 
+        <TrainScheduleManagementHeader/>
+        <PageTitle pageTitle="Update Schedule"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
         <div className="card" style={{width: "50rem",borderRadius: "2em",
@@ -88,8 +89,7 @@ const UpdateSchedule = () => {
         }} 
         >
         <div className="card-body">
-        <p className="card-text" style={{textAlign: "left"}}>  Please Send us details about the inceident you would like to report. Our Complaint Center will analyze your complaint and take the appropriate measure in order that the reported situation will not oocur at any time the future.</p>
-        <hr/> 
+       
         <div>
         <form onSubmit={UpdateSchedule} >
         <div class="form-group">
@@ -134,9 +134,9 @@ const UpdateSchedule = () => {
         </div>
         <br></br> <br></br>
         <div class="form-group">
-        <br></br> <br></br>
+        <br></br> 
       <div class="form-group">
-      <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Complaint</button>
+      <button style={{width : "100%", backgroundColor: "#ff762e",}} type="submit" className="btn btn-primary  ">Update Schedule</button>
       <br/>
       </div>
         </div>

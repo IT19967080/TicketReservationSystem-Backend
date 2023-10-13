@@ -5,10 +5,9 @@ import axios from "axios";
 import React from "react";
 import "../../styles/addcomplaint.module.css"
 import PageTitle from '../PageTitle';
-import TrainManagementHeader from './trainManagementHeader';
-
 import { ToastContainer,toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import TrainScheduleManagementHeader from './trainScheduleManagementHeader';
 
 function AddSchedule(){
   
@@ -145,7 +144,7 @@ function AddSchedule(){
 
     return(
         <>
-        <TrainManagementHeader/>
+        <TrainScheduleManagementHeader/>
         <PageTitle pageTitle="Add New Schedule"/> 
         <div style={{backgroundColor: '#ff762e',textalign: 'left', width: '100%', height: '2px'}}></div>
         <center>
@@ -197,7 +196,7 @@ function AddSchedule(){
         <div class="form-group">
         <br></br>
         <div class="form-group">
-          <label for="exampleFormControlInput1" style={{float:"left"}}>Destinations </label>
+          <label for="exampleFormControlInput1" style={{float:"left"}}>Destination </label>
           <input  value={destination} onChange={(e)=>{setdestination(e.target.value)}} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Destination" title="follow requested format Ex:([name@example.com])"  required="required" />
         </div>
         <div class="form-group"></div>

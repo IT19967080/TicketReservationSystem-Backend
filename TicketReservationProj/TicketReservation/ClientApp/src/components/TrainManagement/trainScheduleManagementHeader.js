@@ -4,7 +4,7 @@ import { Navbar , Container , Nav  } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/common.module.css";
 
-function TrainManagementHeader(){
+function TrainScheduleManagementHeader(){
 
     const navigate = useNavigate();
     function logOut(){
@@ -31,10 +31,10 @@ function TrainManagementHeader(){
                     >   
                        
                       
-                        <Nav.Link href="/addschedule"  className={styles.navLink} >
+                        <Nav.Link href="/viewschedule"  className={styles.navLink} >
                             Schedule Management
                         </Nav.Link>
-                        <Nav.Link href="/viewschedule"  className={styles.navLink} >
+                        <Nav.Link href="/addschedule"  className={styles.navLink} >
                             Add Schedule
                         </Nav.Link>
                       
@@ -55,4 +55,4 @@ function TrainManagementHeader(){
     )
 }
 
-export default TrainManagementHeader;
+export default TrainScheduleManagementHeader;

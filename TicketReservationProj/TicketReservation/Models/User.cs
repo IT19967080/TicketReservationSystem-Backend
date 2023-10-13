@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * File: User.cs
+ * Description: Model representing a user in the application.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
