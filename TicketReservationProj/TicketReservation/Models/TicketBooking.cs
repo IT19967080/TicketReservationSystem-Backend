@@ -35,5 +35,8 @@ namespace ticketreservation.Models
         // Start time of the booking
         [BsonElement("time")]
         public string Time { get; set; } = "start time";
+
+        [BsonElement("username")]
+        public string UserName { get; set; } = "user name";
     }
 }
