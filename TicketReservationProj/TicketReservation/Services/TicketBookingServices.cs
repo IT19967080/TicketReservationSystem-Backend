@@ -51,5 +51,16 @@ namespace TicketReservation.Services
             var count = await _ticketBookingCollection.CountDocumentsAsync(filter);
             return (int)count;
         }
+
+
+        public List<TicketBooking> GetTicketBookingsByUsername(string username)
+        {
+            // Define a filter to find ticket bookings by username
+            var filter = Builders<TicketBooking>.Filter.Eq(tb => tb.UserName, username);
+
+            // Use the filter to find and return the matching ticket bookings
+            return _ticketBookingCollection.Find(filter).ToList();
+        }
+
     }
 }

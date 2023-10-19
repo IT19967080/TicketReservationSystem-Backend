@@ -5,11 +5,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using ticketreservation.Models; // Make sure to import your model namespace
-using ticketreservation.Services;
 using TicketReservation.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 
 namespace ticketreservation.Controllers
 {
@@ -101,5 +98,20 @@ namespace ticketreservation.Controllers
             await _ticketServices.deleteAsync(id);
             return Ok("Deleted Successfully");
         }
+
+        [HttpGet("GetTicketBookingsByUsername")]
+        public IActionResult GetTicketBookingsByUsername(string username)
+        {
+            var ticketBookings = _ticketServices.GetTicketBookingsByUsername(username);
+
+            if (ticketBookings == null || ticketBookings.Count == 0)
+            {
+                return NotFound("No ticket bookings found for the specified username.");
+            }
+
+            return Ok(ticketBookings);
+        }
+
+
     }
 }
