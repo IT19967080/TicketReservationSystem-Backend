@@ -84,10 +84,10 @@ namespace ticketreservation.Controllers
         {
             // Retrieve the existing train data by ID
             var existingTrain = await _trainDataServices.GetAsync(id);
-            if (existingTrain == null)
-            {
-                return NotFound();
-            }
+            //if (existingTrain == null)
+            //{
+            //    return NotFound();
+            //}
             // Update the train data
             updatedTrain.Id = existingTrain.Id;
             await _trainDataServices.updateAsync(id, updatedTrain);
@@ -108,5 +108,23 @@ namespace ticketreservation.Controllers
             await _trainDataServices.deleteAsync(id);
             return Ok("Deleted Successfully");
         }
+
+        [HttpGet("activated")]
+        public async Task<ActionResult<TrainData>> GetActivatedTrains()
+        {
+            try
+            {
+                var activatedTrains = await _trainDataServices.GetActivatedTrains();
+                return Ok(activatedTrains);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
+       
     }
 }

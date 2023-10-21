@@ -100,7 +100,7 @@ const ViewTrain = () => {
   const globalSearch = () => {
 
     filterData = traindata.filter((value) => {
-
+      //console.log(value)
       return (
         value.trainName.toLowerCase().includes(searchVal.toLowerCase()) ||
         value.capacity.toLowerCase().includes(searchVal.toLowerCase()) ||
@@ -112,6 +112,87 @@ const ViewTrain = () => {
     settraindata(filterData)
 
   }
+
+  async function toggleStatus(data){
+    
+      let status,trainname,capacity,drivername,traintype,id;
+    id = data.id;
+
+    const updatedData = traindata.map((item) => {
+      if (item === data) {
+        // Toggle the status between "activated" and "deactivated"
+        item.status = item.status === 'activated' ? 'deactivated' : 'activated';
+        status = item.status
+      }
+      return item;
+    });
+    console.log(data)
+    trainname = data.trainName 
+    capacity = data.capacity
+    drivername = data.driverName
+    traintype = data.trainType
+    console.log(id)
+
+    const newupdatedTrain = {
+         trainname,
+        capacity,
+        drivername,
+        traintype,
+        status
+    }
+    console.log(newupdatedTrain)
+
+    if (data) {
+      await axios.put(`api/traindata/${data.id}`,newupdatedTrain).then((data) => {
+        console.log(data)
+      }).catch((err) => {
+             console.log(err)
+      })
+           settraindata(updatedData);
+    } else {
+     
+    }
+
+  }
+
+  // const toggleStatus = (data) => {
+  //   let status,trainName,capacity,driverName,trainType,id;
+  //   id = data.id;
+
+  //   const updatedData = traindata.map((item) => {
+  //     if (item === data) {
+  //       // Toggle the status between "activated" and "deactivated"
+  //       item.status = item.status === 'activated' ? 'deactivated' : 'activated';
+  //       status = item.status
+  //     }
+  //     return item;
+  //   });
+  //   console.log(data)
+  //   trainName = data.trainName 
+  //   capacity = data.capacity
+  //   driverName = data.driverName
+  //   trainType = data.trainType
+  //   console.log(id)
+
+  //   const newupdatedSchedule = {
+  //       trainName,
+  //       capacity,
+  //       driverName,
+  //       trainType,
+  //       status
+  //   }
+  //   console.log(newupdatedSchedule)
+  //   axios.put(`api/traindata/${data.id}`, newupdatedSchedule).then((res) => {
+  //     console.log(res)
+  //     console.log("Hi")
+     
+    
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  //   settraindata(updatedData);
+  // };
+
   return (
     <>
 
@@ -155,7 +236,7 @@ const ViewTrain = () => {
                   <th scope="col">Train Type</th>
                   <th scope="col">Driver Name</th>
                   <th scope="col">Capacity</th>
-
+                  <th scope="col">Status</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -168,7 +249,14 @@ const ViewTrain = () => {
                       <td>{data.trainType}</td>
                       <td>{data.driverName}</td>
                       <td>{data.capacity}</td>
-
+                      <td>
+              <button
+                style={{ backgroundColor: data.status === 'activated' ? '#4efc03' : '#03a9fc', borderRadius: '8px'}}
+                onClick={() => toggleStatus(data)}
+              >
+                {data.status === 'activated' ? 'Deactivate' : 'Activate'}
+              </button>
+            </td>
                       <td>
 
                         <a onClick={() => {

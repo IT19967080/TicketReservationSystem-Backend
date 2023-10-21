@@ -30,7 +30,7 @@ namespace TicketReservation.Models
 
         // Status of the train (e.g., operational or not)
         [BsonElement("status")]
-        public bool Status { get; set; } = true;
+        public string  Status { get; set; } = "activated";
 
         // Type of the train
         [BsonElement("traintype")]
