@@ -20,25 +20,32 @@ function AddTicket() {
   const [schedule, setschedule] = useState([]);
   const [traindata, settraindata] = useState([]);
 
+
   // const [handletextarea, sethandletextarea] = useState(false)
   const [sucessfull, setSucessfull] = useState(false);
   var navigate = useNavigate();
-
+  
 
   useEffect(() => {
 
     fetch("api/train").then(r => r.json()).then(response => {
-      console.log("Hi")
+      
       //console.log(response)
       setschedule(response)
     }).catch(e => console.log("The error fetching all schedules", e))
 
 
-    fetch("api/traindata").then(r => r.json()).then(response => {
+    fetch("api/traindata/activated").then(r => r.json()).then(response => {
       console.log("Hi")
-      //console.log(response)
+      console.log(response)
       settraindata(response)
+      // const activatedtraindata = response.filter((train) => train.status === 'activated');
+      // setactivatedtrains(activatedtraindata)
+      console.log('Activated Trains:', response); 
+
     }).catch(e => console.log("The error fetching all schedules", e))
+
+
 
   }, [])
 
@@ -173,11 +180,10 @@ function AddTicket() {
                 <div class="form-group">
                   <label for="exampleFormControlSelect1" style={{ float: "left" }}>Train Name</label>
                   <select value={trainName} onChange={(e) => { settrainName(e.target.value) }} class="form-control form-select" required>
-                    {traindata.map((train) => (
-
-                      <option key={train.id} value={train.trainName}>
-                        {train.trainName}
-                      </option>
+                  {traindata.map((train) => (
+          <option key={train.Id} value={train.trainName}>
+            {train.trainName}
+          </option>
                     ))}
                   </select>
                 </div>

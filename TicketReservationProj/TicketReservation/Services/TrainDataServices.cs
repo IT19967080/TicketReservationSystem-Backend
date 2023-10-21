@@ -42,5 +42,14 @@ namespace TicketReservation.Services
         // Delete train data
         public async Task deleteAsync(string id) =>
             await _trainDataCollection.DeleteOneAsync(x => x.Id == id);
+
+        // Get Activated trains
+        public async Task<List<TrainData>> GetActivatedTrains()
+        {
+            var filter = Builders<TrainData>.Filter.Eq(t => t.Status, "activated");
+            var activatedTrains = await _trainDataCollection.Find(filter).ToListAsync();
+            return activatedTrains;
+        }
+
     }
 }

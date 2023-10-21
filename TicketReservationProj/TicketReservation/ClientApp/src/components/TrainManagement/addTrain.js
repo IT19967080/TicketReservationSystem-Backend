@@ -15,7 +15,7 @@ function AddTrain() {
   const [drivername, setdrivername] = useState("");
   const [capacity, setcapacity] = useState("");
   const [traintype, settriantype] = useState("Express");
-  var [status, setstatus] = useState(false);
+  var [status, setstatus] = useState("deactivated");
 
   // const [handletextarea, sethandletextarea] = useState(false)
   const [sucessfull, setSucessfull] = useState(false);
