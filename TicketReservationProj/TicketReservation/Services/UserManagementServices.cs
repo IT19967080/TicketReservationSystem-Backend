@@ -59,6 +59,17 @@ namespace ticketreservation.Services
             return user;
         }
 
+        public async Task<UserModel> GetUserByEmail(string email)
+        {
+            // Create a filter to find the user by username
+            var filter = Builders<UserModel>.Filter.Eq(u => u.Email, email);
+
+            // Use the Find method to search for a user with the given username
+            var user = await _userCollection.Find(filter).FirstOrDefaultAsync();
+
+            return user;
+        }
+
     }
 }
 

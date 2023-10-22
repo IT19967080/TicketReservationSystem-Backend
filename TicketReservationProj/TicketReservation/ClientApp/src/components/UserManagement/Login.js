@@ -4,7 +4,7 @@ import styles from "../../styles/customer.module.css"
 import common from "../../styles/common.module.css";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 function UserLogin() {
 
@@ -19,30 +19,29 @@ function UserLogin() {
       username,
     }
 
-    navigate("/backofficedashboard");
-    // axios.post(`api/userdata`,newCus).then((res) =>{
+    // navigate("/backofficedashboard");
+    axios.post(`api/user`,newCus).then((res) =>{
 
-    //     console.log(res)
-    //     navigate("/dashboard");
-    //    // if(res.data.status === true){
+        console.log(res)
+       // if(res.data.status === true){
 
-    //         // sessionStorage.setItem("customer" , email );
-    //         // console.log(res.data.userData);
-    //         // console.log(res.data.msg);
-    //         // sessionStorage.setItem("CusId" , res.data.userData._id );
-    //         // navigate("/dashboard");
-    //     //}
-    //     // else if(res.data.status === false){
-    //     //     console.log(res.data.msg);
-    //     //     alert("Check Credentials");
-    //     // }
-    //     // else{
-    //     //     console.log("err");
-    //     // }
-    // }).catch((err) =>{
-    //     console.log(err);
-    //     alert(err)
-    // })
+            // sessionStorage.setItem("customer" , email );
+            // console.log(res.data.userData);
+            // console.log(res.data.msg);
+            // sessionStorage.setItem("CusId" , res.data.userData._id );
+            // navigate("/dashboard");
+        //}
+        // else if(res.data.status === false){
+        //     console.log(res.data.msg);
+        //     alert("Check Credentials");
+        // }
+        // else{
+        //     console.log("err");
+        // }
+    }).catch((err) =>{
+        console.log(err);
+        alert(err)
+    })
   }
   return (
     <>
@@ -91,7 +90,7 @@ function UserLogin() {
           </Form>
           <br />
           <div style={{ float: "left" }}>
-            New user ? <a href="/customer-registration">Register New Account</a>
+            New user ? <a href="/register">Register New Account</a>
           </div>
 
         </div>

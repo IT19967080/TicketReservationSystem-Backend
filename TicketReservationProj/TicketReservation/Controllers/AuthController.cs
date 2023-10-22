@@ -17,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace ticketreservation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -31,16 +31,16 @@ namespace ticketreservation.Controllers
             _authService = authService;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
-        {
-            // Register a user and return the result.
-            var user = _authService.Register(request);
-            return Ok(user);
-        }
+        //[HttpPost("register")]
+        //public async Task<ActionResult<User>> Register(UserDto request)
+        //{
+        //    // Register a user and return the result.
+        //    var user = _authService.Register(request);
+        //    return Ok(user);
+        //}
 
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        [HttpPost]
+        public async Task<ActionResult<string>> Login(LoginDto request)
         {
             // Log in a user and return an authentication token.
             var token = await _authService.Login(request);

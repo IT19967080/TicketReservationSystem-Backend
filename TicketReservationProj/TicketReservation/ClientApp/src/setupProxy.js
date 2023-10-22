@@ -25,7 +25,8 @@ const context = [
   "api/ticket",
   "api/userdata",
   "/api/userdata",
- 
+  "/api/user",
+  "api/user",
 ];
 
 module.exports = function (app) {

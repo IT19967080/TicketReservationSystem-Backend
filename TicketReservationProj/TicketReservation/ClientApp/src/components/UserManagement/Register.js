@@ -86,8 +86,6 @@ function UserRegistration() {
       alert("Password does not match!");
     }
 
-
-
   };
 
 
