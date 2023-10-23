@@ -45,7 +45,7 @@ namespace ticketreservation.Controllers
 
         // POST: api/ticket
         [HttpPost]
-        public async Task<IActionResult> Create(TicketBooking ticket)
+        public async Task<IActionResult> Create([FromBody] TicketBooking ticket)
         {
             // Check if there are already 4 reservations for the given ReferenceId
             int existingReservationsCount = await _ticketServices.GetReservationCountByReferenceIdAsync(ticket.ReferenceId);
@@ -81,7 +81,7 @@ namespace ticketreservation.Controllers
             // Update the ticket
             updatedTicket.Id = existingTicket.Id;
             await _ticketServices.updateAsync(id, updatedTicket);
-            return Ok("Updated Successfully");
+            return Ok("updatedTicket");
         }
 
         // DELETE: api/ticket/{id}

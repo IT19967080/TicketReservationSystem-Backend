@@ -37,10 +37,13 @@ function TravelAgentDashboard() {
   };
 
   const clickTravellerProfileManagement = () => {
-    //navigate("/customer-profile");
+    navigate("/create-traveler-profile");
   };
 
-
+  const clickTrainScheduleManagement = () => {
+    navigate("/viewschedule");
+  };
+  
 
 
   useEffect(() => {
@@ -74,6 +77,23 @@ function TravelAgentDashboard() {
               </label>
             </Card>
           </Col>
+
+          
+          <Col>
+            <Card
+              className="dashboard-card"
+              id="card1"
+              onClick={clickTrainScheduleManagement}
+              style={{ width: "18rem", height: "30rem" }}
+            >
+              <RiTicket2Line style={{ alignSelf: "center", marginBottom: "2rem", marginTop: "2rem" }} size={40} />
+              <label style={{ fontSize: "2rem" }}>TRAIN SCHEDULE MANAGEMENT</label>
+              <label className="dashboard-card-subtitle" style={{ marginTop: "1rem", fontSize: "0.8rem", fontWeight: "normal" }}>
+                Manage Train Schedule information.
+              </label>
+            </Card>
+          </Col>
+
           <Col>
             <Card
               className="dashboard-card"

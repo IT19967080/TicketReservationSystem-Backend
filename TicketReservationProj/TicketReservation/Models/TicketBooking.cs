@@ -17,26 +17,29 @@ namespace ticketreservation.Models
         public string Id { get; set; } = string.Empty;
 
         // Reference ID for the booking
-        [BsonElement("referenceid")]
+        [BsonElement("referenceId")]
         public string ReferenceId { get; set; } = "train name";
 
         // Passenger name
-        [BsonElement("name")]
-        public string Name { get; set; } = "train name";
+        [BsonElement("customerName")]
+        public string CustomerName { get; set; } = "train name";
 
         // Name of the booked train
-        [BsonElement("trainname")]
+        [BsonElement("trainName")]
         public string TrainName { get; set; } = "train name";
 
         // Date of the booking
-        [BsonElement("date")]
-        public string Date { get; set; } = "date";
+        [BsonElement("dateOfBooking")]
+        public string DateOfBooking { get; set; } = "date";
 
         // Start time of the booking
-        [BsonElement("time")]
-        public string Time { get; set; } = "start time";
+        [BsonElement("timeOfBooking")]
+        public string TimeOfBooking { get; set; } = "start time";
 
         [BsonElement("username")]
-        public string UserName { get; set; } = "user name";
+        public string UserName { get; set; } = "Rishitha";
+
+        [BsonElement("ticketCount")]
+        public string TicketCount { get; set; } = "2";
     }
 }

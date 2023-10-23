@@ -37,8 +37,8 @@ function TrainManagementHeader() {
                             Trian Management
                         </Nav.Link>
 
-                        <Nav.Link href="/customer-profile" className={styles.navLink} >
-                            Profile
+                        <Nav.Link href="/view-traveler-profiles" className={styles.navLink} >
+                            View Travellers
                         </Nav.Link>
 
                         <Nav.Link className={styles.navLink} onClick={() => {

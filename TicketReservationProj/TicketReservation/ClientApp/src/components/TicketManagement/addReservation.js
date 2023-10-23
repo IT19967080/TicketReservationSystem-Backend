@@ -12,10 +12,13 @@ import AgentHeader from '../Common/TravelAgentHeader';
 function AddTicket() {
 
   const [referenceId, setreferenceId] = useState("");
-  const [name, setname] = useState("");
+  const [customerName, setcustomerName] = useState("");
   const [trainName, settrainName] = useState("Ruhunu Kumari");
-  const [date, setdate] = useState("");
-  const [time, settime] = useState("");
+  const [selecteddate, setselecteddate] = useState([]);
+  const [selectedtime, setselectedtime] = useState([]);
+  const [dateOfBooking, setdateOfBooking] = useState("2023-11-05");
+  const [timeOfBooking, settimeOfBooking] = useState("02:20");
+  const [ticketCount, setticketCount] = useState("");
 
   const [schedule, setschedule] = useState([]);
   const [traindata, settraindata] = useState([]);
@@ -30,8 +33,9 @@ function AddTicket() {
 
     fetch("api/train").then(r => r.json()).then(response => {
       
-      //console.log(response)
+      console.log(response)
       setschedule(response)
+
     }).catch(e => console.log("The error fetching all schedules", e))
 
 
@@ -59,7 +63,7 @@ function AddTicket() {
     const currentDate = new Date();
 
     // Parse the selected date from the input field
-    const selectedDate = new Date(date);
+    const selectedDate = new Date(dateOfBooking);
 
     // Calculate the difference in milliseconds between the selected date and the current date
     const dateDifference = selectedDate - currentDate;
@@ -67,21 +71,24 @@ function AddTicket() {
     // Calculate the number of days difference (30 days = 30 * 24 * 60 * 60 * 1000 milliseconds)
     const daysDifference = dateDifference / (24 * 60 * 60 * 1000);
 
+    
+
     if (daysDifference < 0 || daysDifference > 30) {
       alert("Reservation date must be within 30 days from the current date.");
       return;
     }
     // If the train is not scheduled, proceed to submit the schedule
-
+    
     setSucessfull(false);
     const newTicketData = {
       referenceId,
-      name,
+      customerName,
       trainName,
-      date,
-      time,
+      dateOfBooking,
+      timeOfBooking,
+      ticketCount
     };
-
+    console.log(newTicketData)
     // The rest of your code to submit the schedule goes here
     //console.log(newTicketData)
     const headers = {
@@ -113,10 +120,10 @@ function AddTicket() {
 
 
           settrainName("Ruhunu Kumari");
-          setdate("");
-          setname("");
+          setdateOfBooking("");
+          setcustomerName("");
           setreferenceId("");
-          settime("")
+          settimeOfBooking("")
         }
 
 
@@ -136,9 +143,77 @@ function AddTicket() {
 
 
 
+// Function to handle train name selection
+const handleTrainNameChange = (e) => {
+  
+  const selectedTrainName = e.target.value;
+  console.log(selectedTrainName)
+  settrainName(selectedTrainName);
+  
+  console.log('trainSchedules:', schedule);
+  
+
+  const selectedTrainDates = schedule
+  .filter((train) => train.trainName === selectedTrainName)
+  .map((train) => {
+    console.log(train.date); // Log the date here
+    return train.date; // Return the date
+  });
+
+  const selectedTrainTimes = schedule
+  .filter((train) => train.trainName === selectedTrainName)
+  .map((train) => {
+    console.log(train.startTime); // Log the date here
+    return train.startTime; // Return the date
+  });
+
+  console.log(selectedTrainDates)
+  console.log(selectedTrainTimes)
+  setselecteddate(selectedTrainDates)
+  setselectedtime(selectedTrainTimes)
+};
+
+// Function to handle train name selection
+const handleTrainDateChange = (e) => {
+  
+  const selectedtraindate = e.target.value;
+  console.log(selectedtraindate)
+  setdateOfBooking(selectedtraindate);
+  
+  console.log('trainSchedules:', schedule);
+  
+
+  // const selectedTrainDates = schedule
+  // .filter((train) => train.trainName === selectedTrainName)
+  // .map((train) => {
+  //   console.log(train.date); // Log the date here
+  //   return train.date; // Return the date
+  // });
+
+  const selectedTrainTimes = schedule
+  .filter((train) => train.date === selectedtraindate)
+  .map((train) => {
+    console.log(train.startTime); // Log the date here
+    return train.startTime; // Return the date
+  });
+
+  //console.log(selectedTrainDates)
+  console.log(selectedTrainTimes)
+  console.log(timeOfBooking)
+  //setselecteddate(selectedTrainDates)
+  setselectedtime(selectedTrainTimes)
+};
 
 
-
+// Function to handle train name selection
+const handleTrainTimeChange = (e) => {
+  
+  const selectedtraintime = e.target.value;
+  console.log(selectedtraintime)
+  settimeOfBooking(selectedtraintime);
+  
+  console.log('trainSchedules:', schedule);
+};
 
   function clear() {
     // setdateofComplaint("");
@@ -174,32 +249,52 @@ function AddTicket() {
 
                 <div class="form-group">
                   <label for="exampleFormControlInput1" style={{ float: "left" }}>Customer Name</label>
-                  <input value={name} onChange={(e) => { setname(e.target.value) }} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" title="follow requested format Ex:([name@example.com])" required="required" />
+                  <input value={customerName} onChange={(e) => { setcustomerName(e.target.value) }} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Name" title="follow requested format Ex:([name@example.com])" required="required" />
                 </div>
                 <br></br>
                 <div class="form-group">
                   <label for="exampleFormControlSelect1" style={{ float: "left" }}>Train Name</label>
-                  <select value={trainName} onChange={(e) => { settrainName(e.target.value) }} class="form-control form-select" required>
-                  {traindata.map((train) => (
-          <option key={train.Id} value={train.trainName}>
-            {train.trainName}
-          </option>
-                    ))}
+                  <select value={trainName} onChange={handleTrainNameChange} class="form-control form-select" required>
+                  {Array.from(new Set(schedule.map(train => train.trainName))).map(trainName => (
+    <option key={trainName} value={trainName}>
+      {trainName}
+    </option>
+  ))}
                   </select>
                 </div>
                 <br></br>
                 <div class="form-group">
                   <label for="exampleFormControlInput1" style={{ float: "left" }}>Date</label>
-                  <input value={date} onChange={(e) => { setdate(e.target.value) }} type="date" class="form-control" id="exampleFormControlInput1" required />
+                  <select value={dateOfBooking} onChange={handleTrainDateChange} class="form-control form-select" required>
+                  {Array.from(new Set(selecteddate)).map((trainDate) => (
+    <option key={trainDate} value={trainDate}>
+      {trainDate}
+          </option>
+                    ))}
+                  </select>
+                 
                 </div>
                 <br></br>
 
 
                 <div class="form-group">
                   <label for="exampleFormControlInput1" style={{ float: "left" }}> Time </label>
-                  <input value={time} onChange={(e) => { settime(e.target.value) }} type="time" class="form-control" id="exampleFormControlInput1" placeholder="Enter Schedule Id" title="follow requested format Ex:([name@example.com])" required="required" />
+                  <select value={timeOfBooking} onChange={handleTrainTimeChange}  class="form-control form-select" required>
+                  {selectedtime.map((trainTime) => (
+          <option  key={trainTime} value={trainTime}>
+            {trainTime}
+          </option>
+                    ))}
+                  </select>
                 </div>
 
+                <br></br>
+
+
+<div class="form-group">
+  <label for="exampleFormControlInput1" style={{ float: "left" }}> No of Ticket </label>
+  <input value={ticketCount} onChange={(e) => { setticketCount(e.target.value) }} type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Number of tickets" title="follow requested format Ex:([name@example.com])" required="required" />
+</div>
 
                 <br></br> <br></br>
                 <div class="form-group">

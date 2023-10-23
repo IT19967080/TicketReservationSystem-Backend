@@ -56,7 +56,7 @@ const ViewReservation = () => {
 
     // Calculate the difference in days between the current date and the reservation date
     const currentDate = new Date();
-    const reservationDate = new Date(data.date); // Assuming deletedata.date contains the reservation date
+    const reservationDate = new Date(data.dateOfBooking); // Assuming deletedata.date contains the reservation date
     const daysDifference = Math.floor((reservationDate - currentDate) / (24 * 60 * 60 * 1000));
 
     console.log(daysDifference)
@@ -81,7 +81,7 @@ const ViewReservation = () => {
 
     // Calculate the difference in days between the current date and the reservation date
     const currentDate = new Date();
-    const reservationDate = new Date(data.date); // Assuming deletedata.date contains the reservation date
+    const reservationDate = new Date(data.dateOfBooking); // Assuming deletedata.date contains the reservation date
     const daysDifference = Math.floor((reservationDate - currentDate) / (24 * 60 * 60 * 1000));
 
     console.log(daysDifference)
@@ -191,6 +191,7 @@ const ViewReservation = () => {
                   <th scope="col">ReservationId</th>
                   <th scope="col">Time</th>
                   <th scope="col">Date</th>
+                  <th scope="col">Number of Tickets</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -199,11 +200,12 @@ const ViewReservation = () => {
                 {reservationData.map((data, index) => {
                   return (
                     <tr style={{}}>
-                      <td>{data.name}</td>
+                      <td>{data.customerName}</td>
                       <td>{data.trainName}</td>
                       <td>{data.referenceId}</td>
-                      <td>{data.time}</td>
-                      <td>{data.date}</td>
+                      <td>{data.timeOfBooking}</td>
+                      <td>{data.dateOfBooking}</td>
+                      <td>{data.ticketCount}</td>
                       <td>
                         <i onClick={() => {
                           updateReservation(data)

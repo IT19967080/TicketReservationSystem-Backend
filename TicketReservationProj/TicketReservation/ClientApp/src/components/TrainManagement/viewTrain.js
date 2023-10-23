@@ -134,7 +134,7 @@ const ViewTrain = () => {
     console.log(id)
 
     const newupdatedTrain = {
-         trainname,
+        trainname,
         capacity,
         drivername,
         traintype,
