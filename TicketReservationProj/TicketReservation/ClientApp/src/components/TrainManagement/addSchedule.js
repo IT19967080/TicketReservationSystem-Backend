@@ -19,7 +19,7 @@ function AddSchedule() {
   const [destination, setdestination] = useState("");
   const [schedule, setschedule] = useState([]);
   const [traindata, settraindata] = useState([]);
-  const [activatedtrains, setactivatedtrains] = useState([]);
+
 
   // const [handletextarea, sethandletextarea] = useState(false)
   const [sucessfull, setSucessfull] = useState(false);

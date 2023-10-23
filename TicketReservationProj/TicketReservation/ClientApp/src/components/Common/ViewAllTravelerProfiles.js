@@ -3,6 +3,7 @@ import Header from "./Header";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/customer.module.css";
 import axios from "axios";
+import TrainManagementHeader from "../TrainManagement/trainManagementHeader";
 
 function ViewAllTravelerProfiles() {
   const [travelers, settravelers] = useState([]);
@@ -61,7 +62,7 @@ function ViewAllTravelerProfiles() {
 
   return (
     <div>
-      <Header />
+      <TrainManagementHeader /> 
       <PageTitle pageTitle="View Travelers" />
       <div className={styles.TableContainer}>
         <table class="table table-hover">

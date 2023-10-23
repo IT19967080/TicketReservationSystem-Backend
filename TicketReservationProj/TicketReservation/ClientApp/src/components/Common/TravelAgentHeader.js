@@ -37,7 +37,7 @@ function AgentHeader() {
                         <Nav.Link href="/viewticket" className={styles.navLink} >
                             View Reservation
                         </Nav.Link>
-                        <Nav.Link href="/" className={styles.navLink} >
+                        <Nav.Link href="/view-traveler-profiles" className={styles.navLink} >
                             Traveller
                         </Nav.Link>
                         <Nav.Link href="/register" className={styles.navLink}>
