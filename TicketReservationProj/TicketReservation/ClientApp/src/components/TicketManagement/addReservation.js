@@ -216,10 +216,12 @@ const handleTrainTimeChange = (e) => {
 };
 
   function clear() {
-    // setdateofComplaint("");
-    // setreason("Issue in the shed");
-    // setcomplaintDetails("");
-    // setSucessfull(false)
+    settrainName("");
+    setreferenceId("");
+    setdateOfBooking("");
+    settimeOfBooking("");
+    setticketCount("");
+    setcustomerName("");
   }
 
   return (
