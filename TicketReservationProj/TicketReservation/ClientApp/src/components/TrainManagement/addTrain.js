@@ -102,10 +102,10 @@ function AddTrain() {
 
 
   function clear() {
-    // setdateofComplaint("");
-    // setreason("Issue in the shed");
-    // setcomplaintDetails("");
-    // setSucessfull(false)
+      settrainname("");
+      setcapacity("");
+      setdrivername("");
+      settriantype("");
   }
 
   return (

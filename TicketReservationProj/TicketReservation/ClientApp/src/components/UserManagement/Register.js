@@ -69,8 +69,8 @@ function UserRegistration() {
           });
           setTimeout(() => {
             e.target.reset();
-            //navigate("/customer-login");
-          }, 1000)
+            navigate("/login");
+          }, 2000)
           setRole("Admin");
           setemail("");
           setpassword("");
