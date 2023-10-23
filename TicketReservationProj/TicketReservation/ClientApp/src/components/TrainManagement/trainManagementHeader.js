@@ -36,7 +36,9 @@ function TrainManagementHeader() {
                         <Nav.Link href="/viewtrain" className={styles.navLink} >
                             Trian Management
                         </Nav.Link>
-
+                        <Nav.Link href="/create-traveler-profile" className={styles.navLink} >
+                            Add New Travellers
+                        </Nav.Link>
                         <Nav.Link href="/view-traveler-profiles" className={styles.navLink} >
                             View Travellers
                         </Nav.Link>

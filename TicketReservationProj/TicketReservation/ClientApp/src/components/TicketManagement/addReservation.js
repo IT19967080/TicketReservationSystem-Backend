@@ -13,11 +13,11 @@ function AddTicket() {
 
   const [referenceId, setreferenceId] = useState("");
   const [customerName, setcustomerName] = useState("");
-  const [trainName, settrainName] = useState("Ruhunu Kumari");
+  const [trainName, settrainName] = useState('');
   const [selecteddate, setselecteddate] = useState([]);
   const [selectedtime, setselectedtime] = useState([]);
-  const [dateOfBooking, setdateOfBooking] = useState("2023-11-05");
-  const [timeOfBooking, settimeOfBooking] = useState("02:20");
+  const [dateOfBooking, setdateOfBooking] = useState('');
+  const [timeOfBooking, settimeOfBooking] = useState('');
   const [ticketCount, setticketCount] = useState("");
 
   const [schedule, setschedule] = useState([]);
@@ -119,11 +119,11 @@ function AddTicket() {
           //console.log(res.data)  
 
 
-          settrainName("Ruhunu Kumari");
-          setdateOfBooking("");
-          setcustomerName("");
-          setreferenceId("");
-          settimeOfBooking("")
+           settrainName("");
+           setdateOfBooking("");
+           //setcustomerName("");
+           //setreferenceId("");
+           settimeOfBooking("")
         }
 
 
@@ -189,9 +189,9 @@ const handleTrainDateChange = (e) => {
   //   console.log(train.date); // Log the date here
   //   return train.date; // Return the date
   // });
-
+  console.log(trainName)
   const selectedTrainTimes = schedule
-  .filter((train) => train.date === selectedtraindate)
+  .filter((train) => train.date === selectedtraindate && train.trainName === trainName )
   .map((train) => {
     console.log(train.startTime); // Log the date here
     return train.startTime; // Return the date
@@ -255,6 +255,7 @@ const handleTrainTimeChange = (e) => {
                 <div class="form-group">
                   <label for="exampleFormControlSelect1" style={{ float: "left" }}>Train Name</label>
                   <select value={trainName} onChange={handleTrainNameChange} class="form-control form-select" required>
+                  <option value="" disabled>Select a Train Name</option>
                   {Array.from(new Set(schedule.map(train => train.trainName))).map(trainName => (
     <option key={trainName} value={trainName}>
       {trainName}
@@ -266,6 +267,7 @@ const handleTrainTimeChange = (e) => {
                 <div class="form-group">
                   <label for="exampleFormControlInput1" style={{ float: "left" }}>Date</label>
                   <select value={dateOfBooking} onChange={handleTrainDateChange} class="form-control form-select" required>
+                  <option value="" disabled>Select a Date</option>
                   {Array.from(new Set(selecteddate)).map((trainDate) => (
     <option key={trainDate} value={trainDate}>
       {trainDate}
@@ -280,6 +282,7 @@ const handleTrainTimeChange = (e) => {
                 <div class="form-group">
                   <label for="exampleFormControlInput1" style={{ float: "left" }}> Time </label>
                   <select value={timeOfBooking} onChange={handleTrainTimeChange}  class="form-control form-select" required>
+                  <option value="" disabled>Select a time</option>
                   {selectedtime.map((trainTime) => (
           <option  key={trainTime} value={trainTime}>
             {trainTime}
