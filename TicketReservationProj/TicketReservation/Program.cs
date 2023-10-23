@@ -25,7 +25,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<TrainServices>();
 builder.Services.AddSingleton<TrainDataServices>();
 builder.Services.AddSingleton<TicketBookingServices>();
-builder.Services.AddSingleton<AuthServices>();
 builder.Services.AddSingleton<UserManagemntServices>();
 builder.Services.AddControllersWithViews();
 

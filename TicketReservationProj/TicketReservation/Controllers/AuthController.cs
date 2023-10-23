@@ -14,6 +14,7 @@ using TicketReservation;
 using TicketReservation.Models;
 using TicketReservation.Services;
 using Microsoft.Extensions.Configuration;
+using ticketreservation.Services;
 
 namespace ticketreservation.Controllers
 {
@@ -23,12 +24,13 @@ namespace ticketreservation.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
-        private readonly AuthServices _authService;
+        private readonly UserManagemntServices _userServices;
 
-        public AuthController(IConfiguration configuration, AuthServices authService)
+
+        public AuthController(IConfiguration configuration, UserManagemntServices userServices)
         {
             _configuration = configuration;
-            _authService = authService;
+            _userServices = userServices;
         }
 
         //[HttpPost("register")]
@@ -43,8 +45,15 @@ namespace ticketreservation.Controllers
         public async Task<ActionResult<string>> Login(LoginDto request)
         {
             // Log in a user and return an authentication token.
-            var token = await _authService.Login(request);
-            return Ok(token);
+            var user = await _userServices.GetUserByEmail(request.Username);
+            if (user == null || user.Password != request.Password)
+            {
+                return BadRequest("Incorrect credentials");
+            }
+            else
+            {
+                return Ok(user);
+            }
         }
     }
 }

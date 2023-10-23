@@ -19,10 +19,17 @@ function UserLogin() {
       username,
     }
 
-    // navigate("/backofficedashboard");
     axios.post(`api/user`,newCus).then((res) =>{
 
         console.log(res)
+        if(res.data) {
+          console.log(res.data);
+           sessionStorage.setItem("user" , res.data );
+           navigate("/backofficedashboard");
+  }
+  else {
+    alert("Check Credentials");
+  }
        // if(res.data.status === true){
 
             // sessionStorage.setItem("customer" , email );
