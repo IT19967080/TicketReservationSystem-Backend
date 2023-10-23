@@ -3,9 +3,16 @@ import Header from "./Header";
 import PageTitle from "../PageTitle";
 import styles from "../../styles/customer.module.css";
 import axios from "axios";
+import { Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 function ViewAllTravelerProfiles() {
   const [travelers, settravelers] = useState([]);
+  const navigate = useNavigate();
+
+  const createProfile = () => {
+    navigate("/create-traveler-profile");
+  };
 
   const getTravelers = async () => {
     await axios
@@ -55,6 +62,28 @@ function ViewAllTravelerProfiles() {
     }
   };
 
+  const deleteProfile = async (nic) => {
+    // eslint-disable-next-line no-restricted-globals
+    const confirmed = confirm(
+      `Are you sure you wan to delete account with ${nic} ?`
+    );
+    if (confirmed) {
+      await axios
+        .delete(`api/travelers/${nic}`)
+        .then((res) => {
+          alert("Success");
+          getTravelers();
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+  };
+
+  const goToEdit = (data) => {
+    navigate("/edit-traveler-profile", { state: { data } });
+  };
+
   useEffect(() => {
     getTravelers();
   }, []);
@@ -64,6 +93,17 @@ function ViewAllTravelerProfiles() {
       <Header />
       <PageTitle pageTitle="View Travelers" />
       <div className={styles.TableContainer}>
+        <Button
+          color="primary"
+          style={{
+            backgroundColor: "#ff762e",
+            border: "none",
+            marginBottom: 20,
+          }}
+          onClick={createProfile}
+        >
+          Create New Profile
+        </Button>
         <table class="table table-hover">
           <thead
             style={{
@@ -82,7 +122,7 @@ function ViewAllTravelerProfiles() {
               <th scope="col">Phone No.</th>
               <th scope="col">E-Mail</th>
               <th scope="col">Status</th>
-              <th scope="col">Action</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -98,12 +138,24 @@ function ViewAllTravelerProfiles() {
                   <td>{data.email}</td>
                   <td>{data.isActive ? "Active" : "Deactivated"}</td>
                   <td>
+                    <button
+                      style={{
+                        border: "none",
+                        borderRadius: 5,
+                        background: "skyblue",
+                        color: "white",
+                        marginRight: 10,
+                      }}
+                      onClick={() => goToEdit(data)}
+                    >
+                      Edit
+                    </button>
                     {data.isActive ? (
                       <button
                         style={{
                           border: "none",
                           borderRadius: 5,
-                          background: "red",
+                          background: "orange",
                           color: "white",
                         }}
                         onClick={() => deactivate(data.nic)}
@@ -123,6 +175,18 @@ function ViewAllTravelerProfiles() {
                         Activate
                       </button>
                     )}
+                    <button
+                      style={{
+                        border: "none",
+                        borderRadius: 5,
+                        background: "crimson",
+                        color: "white",
+                        marginLeft: 10,
+                      }}
+                      onClick={() => deleteProfile(data.nic)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
