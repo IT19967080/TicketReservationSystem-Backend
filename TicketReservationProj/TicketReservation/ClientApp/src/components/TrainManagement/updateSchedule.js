@@ -18,6 +18,10 @@ const UpdateSchedule = () => {
   const [destination, setdestination] = useState("");
   const [sucessfull, setSucessfull] = useState(false);
   const { id } = useParams();
+  const [traindata, settraindata] = useState([]);
+
+
+
 
   useEffect(() => {
 
@@ -30,6 +34,16 @@ const UpdateSchedule = () => {
       setendtime(res.data.endTime)
       setsource(res.data.source)
       setdestination(res.data.destination)
+
+      fetch("api/traindata/activated").then(r => r.json()).then(response => {
+        console.log("Hi")
+        console.log(response)
+        settraindata(response)
+        // const activatedtraindata = response.filter((train) => train.status === 'activated');
+        // setactivatedtrains(activatedtraindata)
+        console.log('Activated Trains:', response); 
+  
+      }).catch(e => console.log("The error fetching all schedules", e))
 
 
     }).catch((err) => {
@@ -95,9 +109,11 @@ const UpdateSchedule = () => {
                 <div class="form-group">
                   <label for="exampleFormControlSelect1" style={{ float: "left" }}>Train Name</label>
                   <select value={trainName} onChange={(e) => { settrainName(e.target.value) }} class="form-control form-select" required>
-                    <option>Ruhunu Kumari</option>
-                    <option>Udarata Manike</option>
-                    <option>Galu Kumari</option>
+                  {traindata.map((train) => (
+          <option key={train.Id} value={train.trainName}>
+            {train.trainName}
+          </option>
+                    ))}
                   </select>
                 </div>
                 <br></br>

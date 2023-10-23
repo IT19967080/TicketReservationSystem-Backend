@@ -5,6 +5,7 @@ import styles from "../../styles/customer.module.css";
 import axios from "axios";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
+import TrainManagementHeader from "../TrainManagement/trainManagementHeader";
 
 function ViewAllTravelerProfiles() {
   const [travelers, settravelers] = useState([]);
@@ -90,7 +91,7 @@ function ViewAllTravelerProfiles() {
 
   return (
     <div>
-      <Header />
+      <TrainManagementHeader /> 
       <PageTitle pageTitle="View Travelers" />
       <div className={styles.TableContainer}>
         <Button
