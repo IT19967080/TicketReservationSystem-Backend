@@ -17,7 +17,7 @@ namespace ticketreservation.Controllers
 
 
 
-        // POST: api/train
+        // POST: api/
         [HttpPost]
         public async Task<IActionResult> Register(UserModel newmodel)
         {
