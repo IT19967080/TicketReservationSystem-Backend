@@ -25,7 +25,12 @@ function UserLogin() {
         if(res.data) {
           console.log(res.data);
            sessionStorage.setItem("user" , res.data );
-           navigate("/backofficedashboard");
+           if(res.data.role=='Admin'){
+              navigate("/backofficedashboard"); 
+           }else if(res.data.role=='Travel Agent'){
+              navigate("/travelagentdashboard"); 
+           }
+           
   }
   else {
     alert("Check Credentials");
